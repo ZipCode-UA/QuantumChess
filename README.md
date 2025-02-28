@@ -1,2 +1,2 @@
 # QuantumChess
-Chess Game with a fun spin
+Implimentation of Chess with a quantum spin.
