@@ -1,3 +1,10 @@
+/*
+    QuantumChess.h
+
+    Controller class for the QuantumChess game.
+
+    ZipCode
+*/
 
 #ifndef QUANTUMCHESS_H
 #define QUANTUMCHESS_H
@@ -11,18 +18,12 @@ public:
     */
     QuantumChess();
 
-    // TODO Implement CreateMove
+    // @TODO Implement CreateMove
     /*
-        Method to be called by window when user-input is gathered
-        If the move is valid it is played and the turn is switched
-
-        @param[in] startPos1
-        @param[in] endPos1
-        @param[in] startPos2
-        @param[in] endPos2
-        @return valid move
+        Manages the state of User interaction (i.e. selected piece, then selected move)
     */
-    bool processInput() {}
+    void processInput();
+
 };
 
 #endif
