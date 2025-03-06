@@ -10,8 +10,9 @@ set(Sources
     "bishop.cpp"
     "knight.cpp"
     "pawn.cpp"
-    "QuantumChess.cpp"
+    "quantumChess.cpp"
 )
 
 add_library(src ${Sources})
 target_include_directories(src PUBLIC "../include")
+target_link_libraries(src PUBLIC raylib)
