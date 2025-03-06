@@ -11,7 +11,9 @@
 
 class QuantumChess{
 private:
-
+    // Board board;
+    // Window window;
+    // UIState uiState;
 public:
     /*
         Initializer for QuantumChess
