@@ -18,5 +18,5 @@ FetchContent_MakeAvailable(raylib)
 add_subdirectory(src)
 add_subdirectory(include)
 
-add_executable(${PROJECT_NAME} "src/QuantumChess.cpp")
+add_executable(${PROJECT_NAME} "src/main.cpp")
 target_link_libraries(${PROJECT_NAME} PUBLIC src raylib)
