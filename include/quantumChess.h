@@ -24,6 +24,23 @@ public:
     */
     void processInput();
 
+    // @TODO Implement game loop
+    /*
+        Game loop
+    */
+    void run();
+
+    // @TODO Implement call to render window
+    /*
+        Get new state of board and highlighted squares, then call window to update
+    */
+    void render();
+
+    // @TODO Implement update method
+    /*
+        Update the state of the board with new moves
+    */
+    void update();
 };
 
 #endif
