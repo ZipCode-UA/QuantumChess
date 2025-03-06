@@ -10,4 +10,5 @@ set(includes
     "bishop.h"
     "knight.h"
     "pawn.h"
+    "quantumChess.h"
 )
