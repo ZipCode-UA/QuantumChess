@@ -13,7 +13,11 @@
         Initializer for window class
     */
     Window::Window(){
+        InitWindow(screenWidth, screenHeight);
+        Camera2D camera = { 0 };
+        camera.zoom = 1.0f;
 
+        SetTargetFPS(30);
     }
 
     // @TODO implement render method

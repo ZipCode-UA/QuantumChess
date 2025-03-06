@@ -10,7 +10,8 @@
 
 class Window{
 private:
-
+    const int screenWidth = 800;
+    const int screenHeight = 450;
 public:
     // @TODO implement constructor
     /*
