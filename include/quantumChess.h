@@ -22,7 +22,7 @@ public:
         @param[in] endPos2
         @return valid move
     */
-    // bool CreateMove() {}
+    bool processInput() {}
 };
 
 #endif
