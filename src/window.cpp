@@ -19,11 +19,15 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    board = LoadRenderTexture(screenWidth, screenHeight);
     redrawBoardTexture();
 }
 
+/*
+    based on screenWidth and Screen Height determines board width and start and end positions
+*/
 void Window::redrawBoardTexture(){
+    board = LoadRenderTexture(screenWidth, screenHeight);
+
     boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
     boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
     boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
@@ -77,7 +81,11 @@ void Window::render(){
 void Window::pollEvents(){
     if(IsKeyPressed(KEY_ESCAPE)) {
         CloseWindow();
-    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+    }
+    if (IsWindowResized()){
+        resizedWindow();
+    }
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         // Do Something
     }
 
@@ -94,4 +102,11 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 
     // temporary return so it compiles
     return {0, 0};
+}
+
+void Window::resizedWindow(){
+    screenWidth = GetScreenWidth();
+    screenHeight = GetScreenHeight();
+
+    redrawBoardTexture();
 }
