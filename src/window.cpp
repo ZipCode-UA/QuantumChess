@@ -7,6 +7,7 @@
 */
 
 #include "window.h"
+#include "raymath.h"
 
 /*
     Initializer for window class
@@ -18,7 +19,28 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    boardWidth = (screenWidth < screenHeight) ? screenWidth : screenHeight;
+    board = LoadRenderTexture(screenWidth, screenHeight);
+    redrawBoardTexture();
+}
+
+void Window::redrawBoardTexture(){
+    boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
+    boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
+    boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
+
+    BeginTextureMode(board);
+        ClearBackground(RAYWHITE);
+        float squareSize = boardWidth/8;
+        for(int j = 0; j < 8; ++j){
+            for (int k = 0; k < 8; ++k){
+                DrawRectangleV(
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
+                    {squareSize, squareSize}, 
+                    ((j + k) % 2 == 0) ? BROWN : BEIGE
+                );
+            }
+        }
+    EndTextureMode();
 }
 
 Window::~Window(){
@@ -41,7 +63,9 @@ void Window::render(){
     BeginDrawing();
 
     ClearBackground(RAYWHITE);
-    DrawText("Quantum Chess!", 190, 200, 20, LIGHTGRAY);
+    DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
+
+    DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
     EndDrawing();
 }
@@ -56,13 +80,6 @@ void Window::pollEvents(){
     } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         // Do Something
     }
-
-}
-
-/*
-    Draws empty chess board
-*/
-void Window::drawGrid() {
 
 }
 
