@@ -19,6 +19,12 @@ private:
     Vector2 boardStart;
     Vector2 boardEnd;
 
+    Texture2D sprites;
+    float spriteWidth = 67.5;
+    float spriteHeight = 67.5;
+    int columns = 5;
+    int rows = 2;
+
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
@@ -36,6 +42,8 @@ private:
         Handle resizing of the window
     */
     void resizedWindow();
+
+    void loadSprites();
 
 public:
     /*

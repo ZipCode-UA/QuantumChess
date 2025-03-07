@@ -21,6 +21,8 @@ Window::Window(){
     SetTargetFPS(30);
 
     redrawBoardTexture();
+
+    sprites = LoadTexture("../assets/Chess_Pieces_Sprite.png");
 }
 
 /*
@@ -79,6 +81,8 @@ void Window::render(){
     DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
     DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
+    DrawTexturePro(sprites, {0, 0, spriteWidth, spriteHeight}, {boardStart.x * 2, boardStart.y * 2, boardWidth/8, boardWidth/8}, boardStart, 0.0f, WHITE);
+
     EndDrawing();
 }
 
@@ -109,6 +113,10 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 
     // temporary return so it compiles
     return {0, 0};
+}
+
+void Window::loadSprites(){
+
 }
 
 /*
