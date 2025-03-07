@@ -11,8 +11,8 @@
 
 class Window{
 private:
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    int screenWidth = 800;
+    int screenHeight = 450;
 
     float boardWidth;
     RenderTexture2D board;
@@ -31,6 +31,11 @@ private:
         @return index of cell clicked
     */
     std::pair<int, int> getSquare(Vector2 cursorPosition);
+
+    /*
+        Handle resizing of the window
+    */
+    void resizedWindow();
 
 public:
     /*
