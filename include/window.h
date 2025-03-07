@@ -22,11 +22,6 @@ private:
     std::vector<std::pair<int, int>> highlightedSquares;
 
     /*
-        Draws blank chess board
-    */
-    void drawGrid();
-
-    /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
     void redrawBoardTexture();

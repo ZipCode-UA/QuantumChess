@@ -29,8 +29,17 @@ void Window::redrawBoardTexture(){
     boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
 
     BeginTextureMode(board);
-    ClearBackground(RAYWHITE);
-    drawGrid();
+        ClearBackground(RAYWHITE);
+        float squareSize = boardWidth/8;
+        for(int j = 0; j < 8; ++j){
+            for (int k = 0; k < 8; ++k){
+                DrawRectangleV(
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
+                    {squareSize, squareSize}, 
+                    ((j + k) % 2 == 0) ? BROWN : BEIGE
+                );
+            }
+        }
     EndTextureMode();
 }
 
@@ -72,22 +81,6 @@ void Window::pollEvents(){
         // Do Something
     }
 
-}
-
-/*
-    Draws empty chess board
-*/
-void Window::drawGrid() {
-    float squareSize = boardWidth/8;
-    for(int j = 0; j < 8; ++j){
-        for (int k = 0; k < 8; ++k){
-            DrawRectangleV(
-                Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
-                {squareSize, squareSize}, 
-                ((j + k) % 2 == 0) ? BEIGE : BROWN
-            );
-        }
-    }
 }
 
 // @TODO implement getSquare function
