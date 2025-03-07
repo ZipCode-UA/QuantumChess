@@ -19,8 +19,6 @@ private:
     Vector2 boardStart;
     Vector2 boardEnd;
 
-    std::vector<std::pair<int, int>> highlightedSquares;
-
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
