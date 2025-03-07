@@ -11,7 +11,7 @@
 /*
     Initializer for QuantumChess
 */
-QuantumChess::QuantumChess() {}
+QuantumChess::QuantumChess() { }
 
 /*
     Manages the state of User interaction (i.e. selected piece, then selected move)
@@ -22,13 +22,12 @@ void QuantumChess::processInput() {}
 /*
     Game loop
 */
-void QuantumChess::run() {}
-
-// @TODO Implement call to render window
-/*
-    Get new state of board and highlighted squares, then call window to update
-*/
-void QuantumChess::render() {}
+void QuantumChess::run() {
+    while (!window.shouldClose()){
+        window.pollEvents();
+        window.render();
+    }
+}
 
 // @TODO Implement update method
 /*
