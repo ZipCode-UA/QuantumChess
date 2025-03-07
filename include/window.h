@@ -13,9 +13,12 @@ class Window{
 private:
     const int screenWidth = 800;
     const int screenHeight = 450;
-    int boardWidth;
+
+    float boardWidth;
+    RenderTexture2D board;
     Vector2 boardStart;
     Vector2 boardEnd;
+
     std::vector<std::pair<int, int>> highlightedSquares;
 
     /*
@@ -26,7 +29,7 @@ private:
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
-    void updateBoardDimentions();
+    void redrawBoardTexture();
 
     /*
         Get corrospoding square by cursor position

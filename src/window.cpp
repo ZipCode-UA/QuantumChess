@@ -7,6 +7,7 @@
 */
 
 #include "window.h"
+#include "raymath.h"
 
 /*
     Initializer for window class
@@ -18,13 +19,19 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    updateBoardDimentions();
+    board = LoadRenderTexture(screenWidth, screenHeight);
+    redrawBoardTexture();
 }
 
-void Window::updateBoardDimentions(){
-    boardWidth = (screenWidth < screenHeight) ? screenWidth : screenHeight;
-    boardStart = {(float)screenWidth-boardWidth-20/2, (float)screenHeight-boardWidth-20/2};
+void Window::redrawBoardTexture(){
+    boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
+    boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
     boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
+
+    BeginTextureMode(board);
+    ClearBackground(RAYWHITE);
+    drawGrid();
+    EndTextureMode();
 }
 
 Window::~Window(){
@@ -49,7 +56,7 @@ void Window::render(){
     ClearBackground(RAYWHITE);
     DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
 
-    drawGrid();
+    DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
     EndDrawing();
 }
@@ -71,7 +78,16 @@ void Window::pollEvents(){
     Draws empty chess board
 */
 void Window::drawGrid() {
-
+    float squareSize = boardWidth/8;
+    for(int j = 0; j < 8; ++j){
+        for (int k = 0; k < 8; ++k){
+            DrawRectangleV(
+                Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
+                {squareSize, squareSize}, 
+                ((j + k) % 2 == 0) ? BEIGE : BROWN
+            );
+        }
+    }
 }
 
 // @TODO implement getSquare function
