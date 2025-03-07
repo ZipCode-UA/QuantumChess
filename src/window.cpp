@@ -51,5 +51,10 @@ void Window::render(){
     poll events for 
 */
 void Window::pollEvents(){
+    if(IsKeyPressed(KEY_ESCAPE)) {
+        CloseWindow();
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        // Do Something
+    }
 
 }
