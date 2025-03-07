@@ -7,11 +7,28 @@
 */
 
 #include "raylib.h"
+#include <vector>
 
 class Window{
 private:
     const int screenWidth = 800;
     const int screenHeight = 450;
+    int boardWidth;
+    std::vector<std::pair<int, int>> highlightedSquares;
+
+    /*
+        Draws blank chess board
+    */
+    void drawGrid();
+
+    /*
+        Get corrospoding square by cursor position
+
+        @param cursorPosition 2d vector representing cursor position
+        @return index of cell clicked
+    */
+    std::pair<int, int> getSquare(Vector2 cursorPosition);
+
 public:
     /*
         Initializer for window class
