@@ -28,7 +28,6 @@ Window::Window(){
 void Window::redrawBoardTexture(){
     if (board.texture.id != 0)
         UnloadRenderTexture(board);
-
     board = LoadRenderTexture(screenWidth, screenHeight);
 
     boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
@@ -77,7 +76,6 @@ void Window::render(){
 
     ClearBackground(RAYWHITE);
     DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
-
     DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
     EndDrawing();
@@ -97,7 +95,6 @@ void Window::pollEvents(){
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         // Do Something
     }
-
 }
 
 // @TODO implement getSquare function
