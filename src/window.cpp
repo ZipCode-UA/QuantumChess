@@ -66,6 +66,7 @@ void Window::drawGrid() {
 
 }
 
+// @TODO implement getSquare function
 /*
     Get corrospoding square by cursor position
 
@@ -74,4 +75,6 @@ void Window::drawGrid() {
 */
 std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 
+    // temporary return so it compiles
+    return {0, 0};
 }
