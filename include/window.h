@@ -13,13 +13,16 @@ private:
     const int screenWidth = 800;
     const int screenHeight = 450;
 public:
-    // @TODO implement constructor
     /*
         Initializer for window class
     */
     Window();
 
-    // @TODO implement render method
+    /*
+        Destructor for Window class
+    */
+    ~Window();
+
     /*
         Render window
     */

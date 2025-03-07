@@ -20,12 +20,21 @@ Window::Window(){
     SetTargetFPS(30);
 }
 
+Window::~Window(){
+    CloseWindow();
+}
+
 // @TODO implement render method
 /*
     Render window
 */
 void Window::render(){
+    BeginDrawing();
 
+    ClearBackground(RAYWHITE);
+    DrawText("Quantum Chess!", 190, 200, 20, LIGHTGRAY);
+
+    EndDrawing();
 }
 
 // @TODO implement poll event method
