@@ -26,6 +26,9 @@ Window::Window(){
     based on screenWidth and Screen Height determines board width and start and end positions
 */
 void Window::redrawBoardTexture(){
+    if (board.texture.id != 0)
+        UnloadRenderTexture(board);
+
     board = LoadRenderTexture(screenWidth, screenHeight);
 
     boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
@@ -51,6 +54,9 @@ void Window::redrawBoardTexture(){
     Destructor for Window class
 */
 Window::~Window(){
+    if (board.texture.id != 0)
+        UnloadRenderTexture(board);
+
     CloseWindow();
 }
 

@@ -32,6 +32,9 @@ private:
     */
     std::pair<int, int> getSquare(Vector2 cursorPosition);
 
+    /*
+        Handle resizing of the window
+    */
     void resizedWindow();
 
 public:
