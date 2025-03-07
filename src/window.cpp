@@ -13,6 +13,7 @@
     Initializer for window class
 */
 Window::Window(){
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(screenWidth, screenHeight, "Quantum Chess");
 
     Camera2D camera = { 0 };
