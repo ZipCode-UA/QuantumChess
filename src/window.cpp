@@ -47,6 +47,9 @@ void Window::redrawBoardTexture(){
     EndTextureMode();
 }
 
+/*
+    Destructor for Window class
+*/
 Window::~Window(){
     CloseWindow();
 }
