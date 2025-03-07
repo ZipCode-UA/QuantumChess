@@ -1,0 +1,60 @@
+/*
+    window.h
+
+    window class for QuantumChess Project
+
+    ZipCode
+*/
+
+#include "raylib.h"
+#include <vector>
+
+class Window{
+private:
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    int boardWidth;
+    std::vector<std::pair<int, int>> highlightedSquares;
+
+    /*
+        Draws blank chess board
+    */
+    void drawGrid();
+
+    /*
+        Get corrospoding square by cursor position
+
+        @param cursorPosition 2d vector representing cursor position
+        @return index of cell clicked
+    */
+    std::pair<int, int> getSquare(Vector2 cursorPosition);
+
+public:
+    /*
+        Initializer for window class
+    */
+    Window();
+
+    /*
+        Destructor for Window class
+    */
+    ~Window();
+
+    /*
+        Returns flag for whether or not the window should close
+
+        @return Window Should Close
+    */
+    bool shouldClose();
+
+    /*
+        Render window
+    */
+    void render();
+
+    // @TODO implement poll event method
+    /*
+        poll events for 
+    */
+    void pollEvents();
+};

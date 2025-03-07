@@ -15,3 +15,4 @@ set(Sources
 
 add_library(src ${Sources})
 target_include_directories(src PUBLIC "../include")
+target_link_libraries(src PUBLIC raylib)
