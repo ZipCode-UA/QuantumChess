@@ -65,7 +65,7 @@ Window::~Window(){
 
     @return Window Should Close
 */
-bool Window::shouldClose(){
+bool Window::shouldClose() const {
     return WindowShouldClose();
 }
 
@@ -79,6 +79,10 @@ void Window::render(){
     DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
     DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
+    if (highlightedSquare != std::nullopt){
+        DrawRectangleV(highlightedSquare.value(), {boardWidth/8, boardWidth/8}, BLUE);
+    }
+
     EndDrawing();
 }
 
@@ -86,7 +90,7 @@ void Window::render(){
 /*
     poll events for 
 */
-void Window::pollEvents(){
+std::optional<std::pair<int, int>> Window::pollEvents(){
     if(IsKeyPressed(KEY_ESCAPE)) {
         CloseWindow();
     }
@@ -94,8 +98,9 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        // Do Something
+        return getSquare(GetMousePosition());
     }
+    return std::nullopt;
 }
 
 // @TODO implement getSquare function
@@ -105,10 +110,18 @@ void Window::pollEvents(){
     @param cursorPosition 2d vector representing cursor position
     @return index of cell clicked
 */
-std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
+std::optional<std::pair<int, int>> Window::getSquare(Vector2 cursorPosition){
+    float squareSize = boardWidth/8;
+    std::pair<int, int> pos = { ((int)cursorPosition.x - (int)boardStart.x) / squareSize,  ((int)cursorPosition.y - (int)boardStart.y) / squareSize};
+    if ((pos.first >= 0 && pos.first < 8) && (pos.second >= 0 && pos.second < 8))
+        return pos;
+    else 
+        return std::nullopt;
+}
 
-    // temporary return so it compiles
-    return {0, 0};
+void Window::highlightSquare(std::pair<int, int> square){
+    float squareSize = boardWidth/8;
+    highlightedSquare = {square.first * squareSize + boardStart.x, square.second * squareSize + boardStart.y};
 }
 
 void Window::resizedWindow(){

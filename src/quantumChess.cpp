@@ -1,7 +1,7 @@
 /*
     QuantumChess.cpp
 
-    Controller class for the QuantumChess game.
+    Interface between the window and the game model for the QuantumChess game.
 
     ZipCode
 */
@@ -11,7 +11,7 @@
 /*
     Initializer for QuantumChess
 */
-QuantumChess::QuantumChess() { }
+QuantumChess::QuantumChess(){ }
 
 /*
     Manages the state of User interaction (i.e. selected piece, then selected move)
@@ -24,9 +24,19 @@ void QuantumChess::processInput() {}
 */
 void QuantumChess::run() {
     while (!window.shouldClose()){
-        window.pollEvents();
+        std::optional<std::pair<int, int>> index = window.pollEvents();
+        if (index != std::nullopt)
+            squareClicked(index);
         window.render();
     }
+}
+
+/*
+    Callback for when a cell was clicked in the window
+*/
+void QuantumChess::squareClicked(const std::optional<std::pair<int, int>>& index){
+    // TODO
+    window.highlightSquare(index.value());
 }
 
 // @TODO Implement update method

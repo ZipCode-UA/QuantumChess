@@ -1,7 +1,7 @@
 /*
     QuantumChess.h
 
-    Controller class for the QuantumChess game.
+    Interface between the window and the game model for the QuantumChess game.
 
     ZipCode
 */
@@ -33,6 +33,13 @@ public:
         Game loop
     */
     void run();
+
+    /*
+        Callback for when a cell was clicked in the window
+
+        @param [in] cell index clicked
+    */
+    void squareClicked(const std::optional<std::pair<int, int>>&);
 
     // @TODO Implement update method
     /*

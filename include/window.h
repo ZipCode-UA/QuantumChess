@@ -8,6 +8,7 @@
 
 #include "raylib.h"
 #include <vector>
+#include <optional>
 
 class Window{
 private:
@@ -18,6 +19,10 @@ private:
     RenderTexture2D board;
     Vector2 boardStart;
     Vector2 boardEnd;
+
+    std::optional<Vector2> highlightedSquare;
+
+    void (*clickCallback) (const std::pair<int, int>&);
 
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
@@ -30,7 +35,7 @@ private:
         @param cursorPosition 2d vector representing cursor position
         @return index of cell clicked
     */
-    std::pair<int, int> getSquare(Vector2 cursorPosition);
+    std::optional<std::pair<int, int>> getSquare(Vector2 cursorPosition);
 
     /*
         Handle resizing of the window
@@ -53,7 +58,9 @@ public:
 
         @return Window Should Close
     */
-    bool shouldClose();
+    bool shouldClose() const;
+
+    void highlightSquare(std::pair<int, int> square);
 
     /*
         Render window
@@ -64,5 +71,5 @@ public:
     /*
         poll events for 
     */
-    void pollEvents();
+    std::optional<std::pair<int, int>> pollEvents();
 };
