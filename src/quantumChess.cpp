@@ -31,6 +31,6 @@ void QuantumChess::run() {
 
 // @TODO Implement update method
 /*
-    Update the state of the UI with input from mouse
+    Update the window with changes made to the gameState
 */
 void QuantumChess::update() {}
