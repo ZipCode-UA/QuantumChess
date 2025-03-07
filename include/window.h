@@ -24,6 +24,13 @@ public:
     ~Window();
 
     /*
+        Returns flag for whether or not the window should close
+
+        @return Window Should Close
+    */
+    bool shouldClose();
+
+    /*
         Render window
     */
     void render();

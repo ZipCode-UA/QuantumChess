@@ -29,7 +29,7 @@ Window::~Window(){
 
     @return Window Should Close
 */
-bool shouldClose(){
+bool Window::shouldClose(){
     return WindowShouldClose();
 }
 
