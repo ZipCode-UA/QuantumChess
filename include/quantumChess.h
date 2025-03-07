@@ -9,13 +9,15 @@
 #ifndef QUANTUMCHESS_H
 #define QUANTUMCHESS_H
 
+#include <vector>
+#include "UIState.h"
 #include "window.h"
 
 class QuantumChess{
 private:
     // GameState gameState;
     Window window;
-    // UIState uiState;
+    UIState uiState;
 public:
     /*
         Initializer for QuantumChess

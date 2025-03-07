@@ -11,4 +11,5 @@ set(includes
     "knight.h"
     "pawn.h"
     "quantumChess.h"
+    "UIState.h"
 )

@@ -6,8 +6,12 @@
     ZipCode
 */
 
-#include "raylib.h"
+#ifndef WINDOW_H
+#define WINDOW_H
+
 #include <vector>
+#include "raylib.h"
+#include "UIState.h"
 
 class Window{
 private:
@@ -66,3 +70,5 @@ public:
     */
     void pollEvents();
 };
+
+#endif
