@@ -41,7 +41,9 @@ void Window::render(){
     BeginDrawing();
 
     ClearBackground(RAYWHITE);
-    DrawText("Quantum Chess!", 190, 200, 20, LIGHTGRAY);
+    DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
+
+    drawGrid();
 
     EndDrawing();
 }
