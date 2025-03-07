@@ -9,10 +9,12 @@
 #ifndef QUANTUMCHESS_H
 #define QUANTUMCHESS_H
 
+#include "window.h"
+
 class QuantumChess{
 private:
-    // Board board;
-    // Window window;
+    // GameState gameState;
+    Window window;
     // UIState uiState;
 public:
     /*
@@ -31,12 +33,6 @@ public:
         Game loop
     */
     void run();
-
-    // @TODO Implement call to render window
-    /*
-        Get new state of board and highlighted squares, then call window to update
-    */
-    void render();
 
     // @TODO Implement update method
     /*

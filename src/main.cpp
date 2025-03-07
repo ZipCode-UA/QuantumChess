@@ -7,5 +7,6 @@
 #include "quantumChess.h"
 
 int main() {
-
+    QuantumChess game;
+    game.run();
 }
