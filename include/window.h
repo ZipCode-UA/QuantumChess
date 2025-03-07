@@ -14,6 +14,8 @@ private:
     const int screenWidth = 800;
     const int screenHeight = 450;
     int boardWidth;
+    Vector2 boardStart;
+    Vector2 boardEnd;
     std::vector<std::pair<int, int>> highlightedSquares;
 
     /*
