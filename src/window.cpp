@@ -110,6 +110,9 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
     return {0, 0};
 }
 
+/*
+    Handle resizing of the window
+*/
 void Window::resizedWindow(){
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
