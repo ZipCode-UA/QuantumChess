@@ -24,6 +24,11 @@ private:
     void drawGrid();
 
     /*
+        based on screenWidth and Screen Height determines board width and start and end positions
+    */
+    void updateBoardDimentions();
+
+    /*
         Get corrospoding square by cursor position
 
         @param cursorPosition 2d vector representing cursor position

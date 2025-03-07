@@ -18,7 +18,13 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
+    updateBoardDimentions();
+}
+
+void Window::updateBoardDimentions(){
     boardWidth = (screenWidth < screenHeight) ? screenWidth : screenHeight;
+    boardStart = {(float)screenWidth-boardWidth-20/2, (float)screenHeight-boardWidth-20/2};
+    boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
 }
 
 Window::~Window(){
