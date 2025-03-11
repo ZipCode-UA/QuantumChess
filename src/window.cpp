@@ -41,8 +41,8 @@ void Window::redrawBoardTexture(){
         for(int j = 0; j < 8; ++j){
             for (int k = 0; k < 8; ++k){
                 DrawRectangleV(
-                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
-                    {squareSize, squareSize}, 
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}),
+                    {squareSize, squareSize},
                     ((j + k) % 2 == 0) ? BROWN : BEIGE
                 );
             }
@@ -84,7 +84,7 @@ void Window::render(){
 
 // @TODO implement poll event method
 /*
-    poll events for 
+    poll events for
 */
 void Window::pollEvents(){
     if(IsKeyPressed(KEY_ESCAPE)) {
@@ -98,7 +98,6 @@ void Window::pollEvents(){
     }
 }
 
-// @TODO implement getSquare function
 /*
     Get corrospoding square by cursor position
 
@@ -106,9 +105,18 @@ void Window::pollEvents(){
     @return index of cell clicked
 */
 std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
+    int squareSize = boardWidth/8;
 
-    // temporary return so it compiles
-    return {0, 0};
+    // Check if cursor is within the board
+    if (cursorPosition.x < boardStart.x || cursorPosition.x > boardEnd.x || cursorPosition.y < boardStart.y || cursorPosition.y > boardEnd.y){
+        return {-1, -1};
+    }
+
+    // Get the square
+    int cursorSquareX = (cursorPosition.x - boardStart.x) / squareSize;
+    int cursorSquareY = (cursorPosition.y - boardStart.y) / squareSize;
+
+    return {cursorSquareX, cursorSquareY};
 }
 
 /*
