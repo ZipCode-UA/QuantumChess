@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.30.0)
 project(QuantumChess LANGUAGES CXX)
+set(CMAKE_BUILD_TYPE Debug)
 
 include(FetchContent)
 
@@ -14,6 +15,13 @@ FetchContent_Declare(
     GIT_PROGRESS TRUE
 )
 FetchContent_MakeAvailable(raylib)
+
+# make target - 'run' - compiles and runs the produced binary
+add_custom_target(run
+    COMMAND ${CMAKE_BINARY_DIR}/${PROJECT_NAME}
+    DEPENDS ${PROJECT_NAME}
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)
 
 add_subdirectory(src)
 add_subdirectory(include)
