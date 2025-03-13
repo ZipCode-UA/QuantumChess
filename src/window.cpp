@@ -51,7 +51,6 @@ void Window::render(){
 
         assets.drawBoard();
         assets.drawPiece(1, getSquarePosition({0,0}));
-        std::cerr << (int)getSquarePosition({0, 0}).x << ' ' << (int)getSquarePosition({0,0}).y << '\n';
 
     EndDrawing();
 }

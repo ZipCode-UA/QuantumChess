@@ -49,10 +49,12 @@ void AssetManager::drawPiece(int pieceKey, Vector2 pos){
         spriteRect.x = (pieceKey - 5) * spriteWidth;
     }
 
-    DrawTextureRec(
+    DrawTexturePro(
         spriteSheet,
         spriteRect,
-        pos,
+        {pos.x, pos.y, boardWidth/8, boardWidth/8},
+        {0, 0},
+        0.0f,
         WHITE
     );
 }
