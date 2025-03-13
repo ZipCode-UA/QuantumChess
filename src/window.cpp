@@ -99,6 +99,16 @@ void Window::pollEvents(){
 }
 
 /*
+    Main loop for program
+*/
+void Window::run(){
+    while(!WindowShouldClose()){
+        pollEvents();
+        render();
+    }
+}
+
+/*
     Get corrospoding square by cursor position
 
     @param cursorPosition 2d vector representing cursor position

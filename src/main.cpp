@@ -4,9 +4,9 @@
  *  QuantumChess a version of the game chess with a quantum twist
  */
 
-#include "quantumChess.h"
+#include "window.h"
 
 int main() {
-    QuantumChess game;
+    Window game;
     game.run();
 }

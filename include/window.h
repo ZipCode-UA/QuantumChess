@@ -52,6 +52,11 @@ public:
     ~Window();
 
     /*
+        Main loop for program
+    */
+    void run();
+
+    /*
         Returns flag for whether or not the window should close
 
         @return Window Should Close

@@ -18,17 +18,6 @@ QuantumChess::QuantumChess() { }
 */
 void QuantumChess::processInput() {}
 
-// @TODO Implement game loop
-/*
-    Game loop
-*/
-void QuantumChess::run() {
-    while (!window.shouldClose()){
-        window.pollEvents();
-        window.render();
-    }
-}
-
 // @TODO Implement update method
 /*
     Update the window with changes made to the gameState
