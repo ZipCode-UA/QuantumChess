@@ -159,6 +159,8 @@ void Window::createBoardTexture(){
     @param[in] pieceKey key for the corresponding piece
 */
 void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
+    Vector2 origin = (center ? (Vector2){boardWidth/16, boardWidth/16} : (Vector2){0, 0});
+    Rectangle destination = (Rectangle){pos.x, pos.y, boardWidth/8, boardWidth/8};
     Rectangle spriteRect;
 
     spriteRect.height = spriteHeight;
@@ -175,8 +177,8 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
     DrawTexturePro(
         spriteSheet,
         spriteRect,
-        {pos.x, pos.y, boardWidth/8, boardWidth/8},
-        (center ? (Vector2){boardWidth/16, boardWidth/16} : (Vector2){0, 0}),
+        destination,
+        origin,
         0.0f,
         WHITE
     );
