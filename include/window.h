@@ -6,6 +6,9 @@
     ZipCode
 */
 
+#ifndef WINDOW_H
+#define WINDOW_H
+
 #include "raylib.h"
 #include <vector>
 
@@ -66,3 +69,5 @@ public:
     */
     void pollEvents();
 };
+
+#endif
