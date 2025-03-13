@@ -30,11 +30,6 @@ public: //public for testing should be private
 
 public:
     /*
-        Loads assets when constructed
-    */
-    AssetManager();
-
-    /*
         Unload Assets when destructed
     */
     ~AssetManager();
@@ -55,6 +50,11 @@ public:
         Draws board
     */
     void drawBoard();
+
+    /*
+        Call when the window dimensions are updated
+    */
+    void dimensionsUpdated();
 };
 
 #endif

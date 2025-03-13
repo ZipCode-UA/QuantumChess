@@ -99,4 +99,5 @@ Vector2 Window::getSquarePosition(std::pair<int, int> square){
 void Window::resizedWindow(){
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
+    assets.dimensionsUpdated();
 }

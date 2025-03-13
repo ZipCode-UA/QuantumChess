@@ -8,12 +8,6 @@
 #include "raymath.h"
 
 /*
-    Loads assets when constructed
-*/
-AssetManager::AssetManager(){
-}
-
-/*
     Loads assets from file
 */
 void AssetManager::loadAssets(){
@@ -94,4 +88,11 @@ void AssetManager::createBoardTexture(){
 */
 void AssetManager::drawBoard(){
     DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+}
+
+/*
+    Call when the window dimensions are updated
+*/
+void AssetManager::dimensionsUpdated(){
+    createBoardTexture();
 }
