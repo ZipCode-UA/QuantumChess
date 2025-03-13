@@ -1,5 +1,4 @@
 set(includes
-    "assetManager.h"
     "window.h"
     "gameState.h"
     "board.h"

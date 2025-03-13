@@ -8,6 +8,7 @@
 
 #include "window.h"
 #include "raymath.h"
+#include <iostream>
 
 /*
     Initializer for window class
@@ -20,64 +21,38 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    redrawBoardTexture();
-}
-
-/*
-    based on screenWidth and Screen Height determines board width and start and end positions
-*/
-void Window::redrawBoardTexture(){
-    if (board.texture.id != 0)
-        UnloadRenderTexture(board);
-    board = LoadRenderTexture(screenWidth, screenHeight);
-
-    boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
-    boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
-    boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
-
-    BeginTextureMode(board);
-        ClearBackground(RAYWHITE);
-        float squareSize = boardWidth/8;
-        for(int j = 0; j < 8; ++j){
-            for (int k = 0; k < 8; ++k){
-                DrawRectangleV(
-                    Vector2Add(boardStart, {j*squareSize, k*squareSize}),
-                    {squareSize, squareSize},
-                    ((j + k) % 2 == 0) ? BROWN : BEIGE
-                );
-            }
-        }
-    EndTextureMode();
+    spriteSheet = LoadTexture("../assets/Chess_Pieces_Sprite.png");
+    createBoardTexture();
 }
 
 /*
     Destructor for Window class
 */
 Window::~Window(){
-    if (board.texture.id != 0)
+    if (spriteSheet.id != 0)
+        UnloadTexture(spriteSheet);
+
+    if(board.texture.id != 0)
         UnloadRenderTexture(board);
 
     CloseWindow();
 }
-
-/*
-    Returns flag for whether or not the window should close
-
-    @return Window Should Close
-*/
-bool Window::shouldClose(){
-    return WindowShouldClose();
-}
-
 /*
     Render window
 */
 void Window::render(){
     BeginDrawing();
 
-    ClearBackground(RAYWHITE);
-    DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
-    DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+        ClearBackground(RAYWHITE);
+        DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
+
+        DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+
+        drawPiece(0, getSquarePosition({7, 3}));
+        drawPiece(5, getSquarePosition({4, 7}));
+        drawPiece(1, getSquarePosition({0, 0}));
+        drawPiece(3, getSquarePosition({1, 0}));
+        drawPiece(9, GetMousePosition(), true);
 
     EndDrawing();
 }
@@ -130,11 +105,79 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 }
 
 /*
+    get the position in the window of a square by index
+*/
+Vector2 Window::getSquarePosition(std::pair<int, int> square){
+    return {
+        square.first*boardWidth/8 + boardStart.x,
+        square.second*boardWidth/8 + boardStart.y
+    };
+}
+
+/*
     Handle resizing of the window
 */
 void Window::resizedWindow(){
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
+    createBoardTexture();
+}
 
-    redrawBoardTexture();
+/*
+    Creates board texture
+*/
+void Window::createBoardTexture(){
+    if (board.texture.id != 0)
+        UnloadRenderTexture(board);
+
+    int screenWidth = GetScreenWidth();
+    int screenHeight = GetScreenHeight();
+    board = LoadRenderTexture(screenWidth, screenHeight);
+
+    boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
+    boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
+    boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
+
+    BeginTextureMode(board);
+        ClearBackground(RAYWHITE);
+        float squareSize = boardWidth/8;
+        for(int j = 0; j < 8; ++j){
+            for (int k = 0; k < 8; ++k){
+                DrawRectangleV(
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
+                    {squareSize, squareSize}, 
+                    ((j + k) % 2 == 0) ? BROWN : BEIGE
+                );
+            }
+        }
+    EndTextureMode();
+}
+
+/*
+    Draws a specific piece on the board
+
+    @param[in] pieceKey key for the corresponding piece
+*/
+void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
+    Rectangle spriteRect;
+
+    spriteRect.height = spriteHeight;
+    spriteRect.width = spriteWidth;
+
+    if (pieceKey > 4){
+        spriteRect.y = spriteHeight;
+        spriteRect.x = (pieceKey - 5) * spriteWidth;
+    } else {
+        spriteRect.y = 0;
+        spriteRect.x = pieceKey * spriteWidth;
+    }
+
+    DrawTexturePro(
+        spriteSheet,
+        spriteRect,
+        {pos.x, pos.y, boardWidth/8, boardWidth/8},
+        (center ? (Vector2){boardWidth/16, boardWidth/16} : (Vector2){0, 0}),
+        0.0f,
+        WHITE
+    );
 }
