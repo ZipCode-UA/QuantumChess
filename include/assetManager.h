@@ -15,8 +15,8 @@ public: //public for testing should be private
     Texture2D spriteSheet;
     const int columns = 5;
     const int rows = 2;
-    float spriteWidth = 67.5;
-    float spriteHeight = 67.5;
+    const float spriteWidth = 67.5;
+    const float spriteHeight = 67.5;
 
     RenderTexture2D board;
     Vector2 boardStart;
