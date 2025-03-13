@@ -8,6 +8,7 @@
 
 #include "window.h"
 #include "raymath.h"
+#include <iostream>
 
 /*
     Initializer for window class
@@ -20,45 +21,13 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    redrawBoardTexture();
-
-    sprites = LoadTexture("../assets/Chess_Pieces_Sprite.png");
-}
-
-/*
-    based on screenWidth and Screen Height determines board width and start and end positions
-*/
-void Window::redrawBoardTexture(){
-    if (board.texture.id != 0)
-        UnloadRenderTexture(board);
-    board = LoadRenderTexture(screenWidth, screenHeight);
-
-    boardWidth = ((screenWidth < screenHeight) ? screenWidth : screenHeight) * 0.95;
-    boardStart = {(float)(screenWidth-boardWidth)/2, (float)(screenHeight-boardWidth)/2};
-    boardEnd = {boardStart.x+boardWidth, boardStart.y+boardWidth};
-
-    BeginTextureMode(board);
-        ClearBackground(RAYWHITE);
-        float squareSize = boardWidth/8;
-        for(int j = 0; j < 8; ++j){
-            for (int k = 0; k < 8; ++k){
-                DrawRectangleV(
-                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
-                    {squareSize, squareSize}, 
-                    ((j + k) % 2 == 0) ? BROWN : BEIGE
-                );
-            }
-        }
-    EndTextureMode();
+    assets.loadAssets();
 }
 
 /*
     Destructor for Window class
 */
 Window::~Window(){
-    if (board.texture.id != 0)
-        UnloadRenderTexture(board);
-
     CloseWindow();
 }
 
@@ -77,11 +46,12 @@ bool Window::shouldClose(){
 void Window::render(){
     BeginDrawing();
 
-    ClearBackground(RAYWHITE);
-    DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
-    DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+        ClearBackground(RAYWHITE);
+        DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
 
-    DrawTexturePro(sprites, {0, 0, spriteWidth, spriteHeight}, {boardStart.x * 2, boardStart.y * 2, boardWidth/8, boardWidth/8}, boardStart, 0.0f, WHITE);
+        assets.drawBoard();
+        assets.drawPiece(1, getSquarePosition({0,0}));
+        std::cerr << (int)getSquarePosition({0, 0}).x << ' ' << (int)getSquarePosition({0,0}).y << '\n';
 
     EndDrawing();
 }
@@ -115,8 +85,13 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
     return {0, 0};
 }
 
-void Window::loadSprites(){
-
+/*
+*/
+Vector2 Window::getSquarePosition(std::pair<int, int> square){
+    return {
+        square.first*boardWidth/8 + assets.boardStart.x,
+        square.second*boardWidth/8 + assets.boardStart.y
+    };
 }
 
 /*
@@ -125,6 +100,4 @@ void Window::loadSprites(){
 void Window::resizedWindow(){
     screenWidth = GetScreenWidth();
     screenHeight = GetScreenHeight();
-
-    redrawBoardTexture();
 }

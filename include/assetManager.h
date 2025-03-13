@@ -11,8 +11,22 @@
 #include <unordered_map>
 
 class AssetManager{
-private:
+public: //public for testing should be private
     Texture2D spriteSheet;
+    const int columns = 5;
+    const int rows = 2;
+    float spriteWidth = 67.5;
+    float spriteHeight = 67.5;
+
+    RenderTexture2D board;
+    Vector2 boardStart;
+    Vector2 boardEnd;
+    float boardWidth;
+
+    /*
+        Creates board texture
+    */
+    void createBoardTexture();
 
 public:
     /*
@@ -26,11 +40,21 @@ public:
     ~AssetManager();
 
     /*
-        Retrieves a specific piece texture
+        Loads assets from file
+    */
+    void loadAssets();
+
+    /*
+        Draws a specific piece on the board
 
         @param[in] pieceKey key for the corresponding piece
     */
-    Texture2D& retrievePiece(int pieceKey);
+    void drawPiece(int pieceKey, Vector2 pos);
+
+    /*
+        Draws board
+    */
+    void drawBoard();
 };
 
 #endif

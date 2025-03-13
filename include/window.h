@@ -6,6 +6,10 @@
     ZipCode
 */
 
+#ifndef WINDOW_H
+#define WINDOW_H
+
+#include "assetManager.h"
 #include "raylib.h"
 #include <vector>
 
@@ -13,6 +17,8 @@ class Window{
 private:
     int screenWidth = 800;
     int screenHeight = 450;
+
+    AssetManager assets;
 
     float boardWidth;
     RenderTexture2D board;
@@ -43,7 +49,9 @@ private:
     */
     void resizedWindow();
 
-    void loadSprites();
+    /*
+    */
+    Vector2 getSquarePosition(std::pair<int, int> square);
 
 public:
     /*
@@ -74,3 +82,5 @@ public:
     */
     void pollEvents();
 };
+
+#endif

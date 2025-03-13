@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.30.0)
 project(QuantumChess LANGUAGES CXX)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 include(FetchContent)
 
 set(FETCHCONTENT_QUIET FALSE)
