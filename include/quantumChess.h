@@ -28,12 +28,6 @@ public:
     */
     void processInput();
 
-    // @TODO Implement game loop
-    /*
-        Game loop
-    */
-    void run();
-
     // @TODO Implement update method
     /*
         Update the state of the board with new moves
