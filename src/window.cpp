@@ -8,6 +8,10 @@
 
 #include "window.h"
 #include "raymath.h"
+#include <string>
+#include <iostream>
+
+std::string temp;
 
 /*
     Initializer for window class
@@ -75,9 +79,9 @@ bool Window::shouldClose(){
 void Window::render(){
     BeginDrawing();
 
-    ClearBackground(RAYWHITE);
-    DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
-    DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+        ClearBackground(RAYWHITE);
+        DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
+        DrawText(temp.c_str(), 20, 20, 20, LIGHTGRAY);
 
     EndDrawing();
 }
@@ -94,7 +98,7 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        // Do Something
+        getSquare(GetMousePosition());
     }
 }
 
@@ -116,7 +120,13 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
     int cursorSquareX = (cursorPosition.x - boardStart.x) / squareSize;
     int cursorSquareY = (cursorPosition.y - boardStart.y) / squareSize;
 
-    return {cursorSquareX, cursorSquareY};
+    temp = "Pressed [" + std::to_string(cursorSquareX) + ", " + std::to_string(cursorSquareY) + "]";
+    std::cerr << temp << '\n';
+
+    return {
+        (cursorPosition.x - boardStart.x) / squareSize,
+        (cursorPosition.y - boardStart.y) / squareSize
+    };
 }
 
 /*
