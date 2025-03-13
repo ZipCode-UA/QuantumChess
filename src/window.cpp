@@ -57,7 +57,7 @@ void Window::render(){
 
 // @TODO implement poll event method
 /*
-    poll events for 
+    poll events for
 */
 void Window::pollEvents(){
     if(IsKeyPressed(KEY_ESCAPE)) {
@@ -71,7 +71,16 @@ void Window::pollEvents(){
     }
 }
 
-// @TODO implement getSquare function
+/*
+    Main loop for program
+*/
+void Window::run(){
+    while(!WindowShouldClose()){
+        pollEvents();
+        render();
+    }
+}
+
 /*
     Get corrospoding square by cursor position
 
@@ -79,9 +88,18 @@ void Window::pollEvents(){
     @return index of cell clicked
 */
 std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
+    int squareSize = boardWidth/8;
 
-    // temporary return so it compiles
-    return {0, 0};
+    // Check if cursor is within the board
+    if (cursorPosition.x < boardStart.x || cursorPosition.x > boardEnd.x || cursorPosition.y < boardStart.y || cursorPosition.y > boardEnd.y){
+        return {-1, -1};
+    }
+
+    // Get the square
+    int cursorSquareX = (cursorPosition.x - boardStart.x) / squareSize;
+    int cursorSquareY = (cursorPosition.y - boardStart.y) / squareSize;
+
+    return {cursorSquareX, cursorSquareY};
 }
 
 /*
