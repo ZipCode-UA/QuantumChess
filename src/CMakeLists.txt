@@ -1,5 +1,4 @@
 set(Sources
-    "assetManager.cpp"
     "window.cpp"
     "gameState.cpp"
     "board.cpp"
