@@ -15,26 +15,33 @@
 
 class Window{
 private:
-    int screenWidth = 800;
-    int screenHeight = 450;
+    int screenWidth = 1600;
+    int screenHeight = 1000;
 
-    AssetManager assets;
+    Texture2D spriteSheet;
+    const int columns = 5;
+    const int rows = 2;
+    const float spriteWidth = 67.5;
+    const float spriteHeight = 67.5;
 
-    float boardWidth;
     RenderTexture2D board;
     Vector2 boardStart;
     Vector2 boardEnd;
-
-    Texture2D sprites;
-    float spriteWidth = 67.5;
-    float spriteHeight = 67.5;
-    int columns = 5;
-    int rows = 2;
+    float boardWidth;
 
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
-    void redrawBoardTexture();
+
+    /*
+        Render window
+    */
+    void render();
+
+    /*
+        poll events for 
+    */
+    void pollEvents();
 
     /*
         Get corrospoding square by cursor position
@@ -53,6 +60,18 @@ private:
     */
     Vector2 getSquarePosition(std::pair<int, int> square);
 
+    /*
+        Creates board texture
+    */
+    void createBoardTexture();
+
+    /*
+        Draws a specific piece on the board
+
+        @param[in] pieceKey key for the corresponding piece
+    */
+    void drawPiece(int pieceKey, Vector2 pos, bool center = false);
+
 public:
     /*
         Initializer for window class
@@ -69,23 +88,7 @@ public:
     */
     void run();
 
-    /*
-        Returns flag for whether or not the window should close
 
-        @return Window Should Close
-    */
-    bool shouldClose();
-
-    /*
-        Render window
-    */
-    void render();
-
-    // @TODO implement poll event method
-    /*
-        poll events for 
-    */
-    void pollEvents();
 };
 
 #endif
