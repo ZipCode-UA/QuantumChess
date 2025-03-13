@@ -10,14 +10,14 @@
     Loads assets when constructed
 */
 AssetManager::AssetManager(){
-
+    spriteSheet = LoadTexture("../assets/Chess_Pieces_Sprite.png");
 }
 
 /*
     Unload Assets when destructed
 */
 AssetManager::~AssetManager(){
-
+    UnloadTexture(spriteSheet);
 }
 
 /*

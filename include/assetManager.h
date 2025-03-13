@@ -12,7 +12,7 @@
 
 class AssetManager{
 private:
-    std::unordered_map<int, Texture2D> pieces;
+    Texture2D spriteSheet;
 
 public:
     /*
