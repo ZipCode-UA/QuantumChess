@@ -1,26 +1,25 @@
 /*
-    QuantumChess.h
+    BoardInterface.h
 
-    Controller class for the QuantumChess game.
+    Controller class for the BoardInterface game.
 
     ZipCode
 */
 
-#ifndef QUANTUMCHESS_H
-#define QUANTUMCHESS_H
+#ifndef BOARDINTERFACE_H
+#define BOARDINTERFACE_H
 
 #include "window.h"
 
-class QuantumChess{
+class BoardInterface{
 private:
     // GameState gameState;
-    Window window;
     // UIState uiState;
 public:
     /*
         Initializer for QuantumChess
     */
-    QuantumChess();
+    BoardInterface();
 
     // @TODO Implement CreateMove
     /*
