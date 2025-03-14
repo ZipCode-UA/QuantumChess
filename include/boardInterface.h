@@ -14,7 +14,6 @@
 class BoardInterface{
 private:
     // GameState gameState;
-    // UIState uiState;
 public:
     /*
         Initializer for QuantumChess
