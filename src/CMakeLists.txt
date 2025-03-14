@@ -9,7 +9,7 @@ set(Sources
     "bishop.cpp"
     "knight.cpp"
     "pawn.cpp"
-    "quantumChess.cpp"
+    "boardInterface.cpp"
 )
 
 add_library(src ${Sources})
