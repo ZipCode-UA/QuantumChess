@@ -9,7 +9,9 @@
 #ifndef BISHOP_H
 #define BISHOP_H
 
-class Bishop{
+#include "piece.h"
+
+class Bishop : Piece{
 
 };
 

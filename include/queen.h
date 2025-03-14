@@ -9,7 +9,9 @@
 #ifndef QUEEN_H
 #define QUEEN_H
 
-class Queen{
+#include "piece.h"
+
+class Queen : Piece{
 
 };
 

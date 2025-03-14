@@ -9,7 +9,9 @@
 #ifndef PAWN_H
 #define PAWN_H
 
-class Pawn{
+#include "piece.h"
+
+class Pawn : Piece{
 
 };
 

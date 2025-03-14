@@ -1,15 +1,17 @@
 /*
-    TempName.h
+    Rook.h
 
-    TempName class for QuantumChess Project
+    Rook class for QuantumChess Project
 
     ZipCode
 */
 
-#ifndef TEMPNAME_H
-#define TEMPNAME_H
+#ifndef ROOK_H
+#define ROOK_H
 
-class TempName{
+#include "piece.h"
+
+class Rook : Piece{
 
 };
 
