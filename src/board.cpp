@@ -46,13 +46,9 @@ void Board::resetBoard(){
                     pieces[i][j] = std::make_unique<Knight>(color, (Pos){i, j});
                 else if (j == 2 || j == 5)
                     pieces[i][j] = std::make_unique<Bishop>(color, (Pos){i, j});
-                else if (j == 3 && i == 0)
+                else if ((j == 4 && i == 7) || (j == 3 && i == 0))
                     pieces[i][j] = std::make_unique<King>(color, (Pos){i, j});
-                else if (j == 4 && i == 7)
-                    pieces[i][j] = std::make_unique<King>(color, (Pos){i, j});
-                else if (j == 4 && i == 0)
-                    pieces[i][j] = std::make_unique<Queen>(color, (Pos){i, j});
-                 else if (j == 3 && i == 7)
+                else if ((j == 4 && i == 0) || (j == 3 && i == 7))
                     pieces[i][j] = std::make_unique<Queen>(color, (Pos){i, j});
             }
             else {
