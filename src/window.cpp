@@ -21,19 +21,22 @@ Window::Window(){
     camera.zoom = 1.0f;
     SetTargetFPS(30);
 
-    spriteSheet = LoadTexture("../assets/Chess_Pieces_Sprite.png");
     createBoardTexture();
+
+    loadSprites();
 }
 
 /*
     Destructor for Window class
 */
 Window::~Window(){
-    if (spriteSheet.id != 0)
-        UnloadTexture(spriteSheet);
-
     if(board.texture.id != 0)
         UnloadRenderTexture(board);
+
+    for (auto& cur : sprites){
+        if (cur.id != 0)
+            UnloadTexture(cur);
+    }
 
     CloseWindow();
 }
@@ -163,25 +166,30 @@ void Window::createBoardTexture(){
 void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
     Vector2 origin = (center ? (Vector2){boardWidth/16, boardWidth/16} : (Vector2){0, 0});
     Rectangle destination = (Rectangle){pos.x, pos.y, boardWidth/8, boardWidth/8};
-    Rectangle spriteRect;
-
-    spriteRect.height = spriteHeight;
-    spriteRect.width = spriteWidth;
-
-    if (pieceKey > 5){
-        spriteRect.y = spriteHeight;
-        spriteRect.x = (pieceKey - 6) * spriteWidth;
-    } else {
-        spriteRect.y = 0;
-        spriteRect.x = pieceKey * spriteWidth;
-    }
 
     DrawTexturePro(
-        spriteSheet,
-        spriteRect,
+        sprites[pieceKey],
+        (Rectangle){0, 0, spriteWidth, spriteHeight},
         destination,
         origin,
         0.0f,
         WHITE
     );
+}
+
+void Window::loadSprites(){
+    sprites.resize(12);
+
+    sprites[pawn] = LoadTexture("../assetsStolen/wp.png");
+    sprites[knight] = LoadTexture("../assetsStolen/wn.png");
+    sprites[bishop] = LoadTexture("../assetsStolen/wb.png");
+    sprites[rook] = LoadTexture("../assetsStolen/wr.png");
+    sprites[queen] = LoadTexture("../assetsStolen/wq.png");
+    sprites[king] = LoadTexture("../assetsStolen/wk.png");
+    sprites[pawn + 6] = LoadTexture("../assetsStolen/bp.png");
+    sprites[knight + 6] = LoadTexture("../assetsStolen/bn.png");
+    sprites[bishop + 6] = LoadTexture("../assetsStolen/bb.png");
+    sprites[rook + 6] = LoadTexture("../assetsStolen/br.png");
+    sprites[queen + 6] = LoadTexture("../assetsStolen/bq.png");
+    sprites[king + 6] = LoadTexture("../assetsStolen/bk.png");
 }

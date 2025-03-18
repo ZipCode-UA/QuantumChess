@@ -18,11 +18,9 @@ private:
     int screenWidth = 1600;
     int screenHeight = 1000;
 
-    Texture2D spriteSheet;
-    const int columns = 5;
-    const int rows = 2;
-    const float spriteWidth = 67.5;
-    const float spriteHeight = 67.5;
+    std::vector<Texture2D> sprites;
+    const float spriteWidth = 300;
+    const float spriteHeight = 300;
 
     RenderTexture2D board;
     Vector2 boardStart;
@@ -30,6 +28,8 @@ private:
     float boardWidth;
 
     Board game;
+
+    void loadSprites();
 
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
