@@ -9,6 +9,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "board.h"
 #include "raylib.h"
 #include <vector>
 
@@ -27,6 +28,8 @@ private:
     Vector2 boardStart;
     Vector2 boardEnd;
     float boardWidth;
+
+    Board game;
 
     /*
         based on screenWidth and Screen Height determines board width and start and end positions

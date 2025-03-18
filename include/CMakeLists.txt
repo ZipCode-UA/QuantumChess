@@ -10,4 +10,5 @@ set(includes
     "knight.h"
     "pawn.h"
     "boardInterface.h"
+    "types.h"
 )

@@ -11,8 +11,13 @@
 
 #include "piece.h"
 
-class Pawn : Piece{
+class Pawn : public Piece{
+public:
+    Pawn(SquareColor c, Pos pos);
 
+    void getValidMoves() override;
+
+    PieceID getType() const override;
 };
 
 #endif

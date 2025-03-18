@@ -11,8 +11,11 @@
 
 #include "piece.h"
 
-class Bishop : Piece{
-
+class Bishop : public Piece{
+public:
+    Bishop(SquareColor color, Pos pos);
+    void getValidMoves() override;
+    PieceID getType() const override;
 };
 
 #endif

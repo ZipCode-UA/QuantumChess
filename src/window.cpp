@@ -37,6 +37,7 @@ Window::~Window(){
 
     CloseWindow();
 }
+
 /*
     Render window
 */
@@ -48,10 +49,11 @@ void Window::render(){
 
         DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
-        drawPiece(0, getSquarePosition({7, 3}));
-        drawPiece(5, getSquarePosition({4, 7}));
-        drawPiece(1, getSquarePosition({0, 0}));
-        drawPiece(3, getSquarePosition({1, 0}));
+        auto pieces = game.getPieces();
+        for (auto cur : pieces){
+            drawPiece(cur.second, getSquarePosition({cur.first.row, cur.first.column}));
+        }
+
         drawPiece(9, GetMousePosition(), true);
 
     EndDrawing();
@@ -109,8 +111,8 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 */
 Vector2 Window::getSquarePosition(std::pair<int, int> square){
     return {
-        square.first*boardWidth/8 + boardStart.x,
-        square.second*boardWidth/8 + boardStart.y
+        (7 - square.second) * boardWidth/8 + boardStart.x,
+        (7 - square.first) * boardWidth/8 + boardStart.y
     };
 }
 
@@ -166,9 +168,9 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
     spriteRect.height = spriteHeight;
     spriteRect.width = spriteWidth;
 
-    if (pieceKey > 4){
+    if (pieceKey > 5){
         spriteRect.y = spriteHeight;
-        spriteRect.x = (pieceKey - 5) * spriteWidth;
+        spriteRect.x = (pieceKey - 6) * spriteWidth;
     } else {
         spriteRect.y = 0;
         spriteRect.x = pieceKey * spriteWidth;

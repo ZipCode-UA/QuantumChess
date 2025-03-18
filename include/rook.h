@@ -11,8 +11,13 @@
 
 #include "piece.h"
 
-class Rook : Piece{
+class Rook : public Piece {
+public:
+    Rook(SquareColor color, Pos pos);
 
+    void getValidMoves() override;
+
+    PieceID getType() const override;
 };
 
 #endif
