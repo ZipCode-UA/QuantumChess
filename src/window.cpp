@@ -181,16 +181,16 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
 void Window::loadSprites(){
     sprites.resize(12);
 
-    sprites[pawn] = LoadTexture("../assetsStolen/wp.png");
-    sprites[knight] = LoadTexture("../assetsStolen/wn.png");
-    sprites[bishop] = LoadTexture("../assetsStolen/wb.png");
-    sprites[rook] = LoadTexture("../assetsStolen/wr.png");
-    sprites[queen] = LoadTexture("../assetsStolen/wq.png");
-    sprites[king] = LoadTexture("../assetsStolen/wk.png");
-    sprites[pawn + 6] = LoadTexture("../assetsStolen/bp.png");
-    sprites[knight + 6] = LoadTexture("../assetsStolen/bn.png");
-    sprites[bishop + 6] = LoadTexture("../assetsStolen/bb.png");
-    sprites[rook + 6] = LoadTexture("../assetsStolen/br.png");
-    sprites[queen + 6] = LoadTexture("../assetsStolen/bq.png");
-    sprites[king + 6] = LoadTexture("../assetsStolen/bk.png");
+    sprites[pawn] = LoadTexture("../assets/wp.png");
+    sprites[knight] = LoadTexture("../assets/wn.png");
+    sprites[bishop] = LoadTexture("../assets/wb.png");
+    sprites[rook] = LoadTexture("../assets/wr.png");
+    sprites[queen] = LoadTexture("../assets/wq.png");
+    sprites[king] = LoadTexture("../assets/wk.png");
+    sprites[pawn + 6] = LoadTexture("../assets/bp.png");
+    sprites[knight + 6] = LoadTexture("../assets/bn.png");
+    sprites[bishop + 6] = LoadTexture("../assets/bb.png");
+    sprites[rook + 6] = LoadTexture("../assets/br.png");
+    sprites[queen + 6] = LoadTexture("../assets/bq.png");
+    sprites[king + 6] = LoadTexture("../assets/bk.png");
 }
