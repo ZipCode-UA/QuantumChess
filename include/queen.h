@@ -11,8 +11,11 @@
 
 #include "piece.h"
 
-class Queen : Piece{
-
+class Queen : public Piece{
+public:
+    Queen(SquareColor c, Pos pos);
+    void getValidMoves() override;
+    PieceID getType() const override;
 };
 
 #endif
