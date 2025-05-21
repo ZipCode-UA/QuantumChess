@@ -57,7 +57,8 @@ void Window::render(){
             drawPiece(cur.second, getSquarePosition({cur.first.row, cur.first.column}));
         }
 
-        drawPiece(9, GetMousePosition(), true);
+        // Testing Moving Pieces With Mouse
+        // drawPiece(9, GetMousePosition(), true);
 
     EndDrawing();
 }
