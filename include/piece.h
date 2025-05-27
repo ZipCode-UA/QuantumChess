@@ -25,7 +25,6 @@ public:
     virtual void getValidMoves() = 0;
 
     virtual PieceID getType() const = 0;
-
 };
 
 #endif
