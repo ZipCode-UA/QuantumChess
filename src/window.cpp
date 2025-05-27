@@ -8,6 +8,7 @@
 
 #include "window.h"
 #include "boardInterface.h"
+#include "board.h"
 #include "raymath.h"
 #include "raylib.h"
 #include <iostream>
