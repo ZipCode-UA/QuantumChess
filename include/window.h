@@ -59,6 +59,7 @@ private:
     void resizedWindow();
 
     /*
+        get the position in the window of a square by index
     */
     Vector2 getSquarePosition(std::pair<int, int> square);
 
