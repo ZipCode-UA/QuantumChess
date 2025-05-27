@@ -46,14 +46,6 @@ private:
     void pollEvents();
 
     /*
-        Get corresponding square by cursor position
-
-        @param cursorPosition 2d vector representing cursor position
-        @return index of cell clicked
-    */
-    std::pair<int, int> getSquare(Vector2 cursorPosition);
-
-    /*
         Handle resizing of the window
     */
     void resizedWindow();
@@ -93,6 +85,14 @@ public:
         Main loop for program
     */
     void run();
+
+    /*
+        Get corresponding square by cursor position
+
+        @param cursorPosition 2d vector representing cursor position
+        @return index of cell clicked
+    */
+    std::pair<int, int> getSquare(Vector2 cursorPosition);
 
 };
 
