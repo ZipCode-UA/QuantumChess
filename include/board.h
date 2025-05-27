@@ -23,6 +23,8 @@ public:
     void resetBoard();
 
     std::vector<std::pair<Pos, int>> getPieces();
+
+    void movePiece(Pos from, Pos to);
 };
 
 #endif
