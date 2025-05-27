@@ -20,6 +20,7 @@ Board::Board(){
     resetBoard();
 }
 
+// Returns a list of pieces on the Board. Stores position and type of each piece
 std::vector<std::pair<Pos, int>> Board::getPieces() {
     std::vector<std::pair<Pos, int>> pieceList;
     for (int i = 0; i < 8; ++i){
