@@ -60,8 +60,8 @@ void Board::resetBoard(){
 }
 
 void Board::movePiece(Pos from, Pos to) {
-        // if (pieces[from.row][from.column] != nullptr) {
-        //     pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
-        //     pieces[from.row][from.column] = nullptr;
-        // }
+    if (pieces[from.row][from.column] != nullptr) {
+        pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
+        pieces[from.row][from.column] = nullptr;
+    }
 }
