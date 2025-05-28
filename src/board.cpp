@@ -68,9 +68,4 @@ void Board::movePiece(Pos from, Pos to) {
         pieces[to.row][to.column]->setPosition(to);
         pieces[from.row][from.column] = nullptr;
     }
-
-    // update pieces
-    // gameWindow.updateBoard();
-    // std::cout << "Piece moved successfully.\n";
-
 }
