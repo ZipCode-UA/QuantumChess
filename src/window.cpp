@@ -80,6 +80,9 @@ void Window::pollEvents(){
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         std::cout << "Mouse clicked " << std::endl;
         game.movePiece({1, 1}, {5, 5}); // Example move, replace with actual logic
+        game.movePiece({1, 0}, {5, 5}); // Example move, replace with actual logic
+        game.movePiece({1, 2}, {5, 5}); // Example move, replace with actual logic
+        game.movePiece({1, 3}, {5, 5}); // Example move, replace with actual logic
         updateBoard();
 
         // cout all piece positions on the board
