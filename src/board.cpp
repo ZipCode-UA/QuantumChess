@@ -86,3 +86,7 @@ void Board::movePiece(Pos from, Pos to, std::function<void()> updateBoard) {
 
     updateBoard();
 }
+
+bool Board::isEmpty(Pos pos) {
+    return pieces[pos.row][pos.column] == nullptr;
+}

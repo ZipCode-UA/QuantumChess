@@ -30,6 +30,9 @@ public:
     std::unique_ptr<Piece>& getPiece(Pos pos);
 
     void movePiece(Pos from, Pos to, std::function<void()> updateBoard );
+
+    // Checks if the square on board is empty
+    bool isEmpty(Pos pos);
 };
 
 #endif
