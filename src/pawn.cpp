@@ -11,7 +11,10 @@ Pawn::Pawn(SquareColor color, Pos position) : Piece(color, position) {
     therefore the function would return {1, 0}
 */
 std::pair<int, int> Pawn::getValidMoves(){
-    return {1, 0};
+    if(color == White){
+        return {1, 0};
+    }
+    return {-1, 0};
 }
 
 PieceID Pawn::getType() const{

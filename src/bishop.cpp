@@ -9,7 +9,7 @@ std::pair<int, int> Bishop::getValidMoves(){
         return {2, 2};
     }
 
-    return {2, 2};
+    return {-2, -2};
 }
 
 PieceID Bishop::getType() const{

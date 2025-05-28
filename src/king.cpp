@@ -5,7 +5,10 @@ King::King(SquareColor color, Pos position) : Piece(color, position) {
 }
 
 std::pair<int, int> King::getValidMoves(){
-    return {1, 1};
+    if(color == White){
+        return {1, 1};
+    }
+    return {-1, -1};
 }
 
 PieceID King::getType() const{
