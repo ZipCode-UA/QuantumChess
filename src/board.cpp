@@ -17,6 +17,7 @@
 #include "window.h"
 #include <optional>
 #include <functional>
+#include <stdexcept>
 
 Board::Board(){
     resetBoard();
@@ -33,6 +34,13 @@ std::vector<std::pair<Pos, int>> Board::getPieces() {
         }
     }
     return pieceList;
+}
+
+std::unique_ptr<Piece>& Board::getPiece(Pos pos) {
+    if (pos.row < 0 || pos.row >= 8 || pos.column < 0 || pos.column >= 8) {
+        throw std::out_of_range("Position out of bounds");
+    }
+    return pieces[pos.row][pos.column];
 }
 
 void Board::resetBoard(){

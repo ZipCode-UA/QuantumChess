@@ -81,7 +81,8 @@ void Window::pollEvents(){
         // Moving piece
         {
             auto square = getSquare(GetMousePosition());
-            game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}, [this]() { updateBoard(); });
+            auto moves = game.getPiece({square.first, square.second})->getValidMoves();
+            game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
         }
     }
 }
