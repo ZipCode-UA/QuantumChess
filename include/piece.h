@@ -26,9 +26,7 @@ public:
 
     virtual PieceID getType() const = 0;
 
-    void setPosition(Pos newPos) {
-        pos = newPos;
-    }
+    void setPosition(Pos newPos);
 };
 
 #endif
