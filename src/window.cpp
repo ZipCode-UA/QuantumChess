@@ -79,18 +79,16 @@ void Window::pollEvents(){
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         std::cout << "Mouse clicked " << std::endl;
-        game.movePiece({1, 1}, {5, 5}); // Example move, replace with actual logic
-        game.movePiece({1, 0}, {5, 5}); // Example move, replace with actual logic
-        game.movePiece({1, 2}, {5, 5}); // Example move, replace with actual logic
-        game.movePiece({1, 3}, {5, 5}); // Example move, replace with actual logic
+        auto square = getSquare(GetMousePosition());
+        game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}); // Example move, replace with actual logic
         updateBoard();
 
         // cout all piece positions on the board
-        auto pieces = game.getPieces();
-        std::cout << "Current pieces on the board:" << std::endl;
-        for (const auto& piece : pieces) {
-            std::cout << "Piece at (" << piece.first.row << ", " << piece.first.column << ") with type " << piece.second << std::endl;
-        }
+        // auto pieces = game.getPieces();
+        // std::cout << "Current pieces on the board:" << std::endl;
+        // for (const auto& piece : pieces) {
+        //     std::cout << "Piece at (" << piece.first.row << ", " << piece.first.column << ") with type " << piece.second << std::endl;
+        // }
     }
 
 }
@@ -195,8 +193,7 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
 }
 
 void Window::highlightSquare(){
-    Vector2 cursorPosition = GetMousePosition();
-    auto square = getSquare(cursorPosition);
+    auto square = getSquare(GetMousePosition());
     if (square.first != -1 && square.second != -1) {
         Vector2 squarePos = getSquarePosition(square);
         DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
