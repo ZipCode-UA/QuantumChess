@@ -41,7 +41,7 @@ private:
     void render();
 
     /*
-        poll events for 
+        poll events for
     */
     void pollEvents();
 
@@ -69,6 +69,8 @@ private:
 
     // highlight the square that the user is hovering over
     void highlightSquare();
+
+    void movePiece();
 
 public:
     /*

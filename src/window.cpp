@@ -78,14 +78,7 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        // Moving piece
-        {
-            auto square = getSquare(GetMousePosition());
-            if(!game.isEmpty({square.first, square.second})){
-                auto moves = game.getPiece({square.first, square.second})->getValidMoves();
-                game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
-            }
-        }
+        movePiece();
     }
 }
 
@@ -160,8 +153,8 @@ void Window::createBoardTexture(){
         for(int j = 0; j < 8; ++j){
             for (int k = 0; k < 8; ++k){
                 DrawRectangleV(
-                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
-                    {squareSize, squareSize}, 
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}),
+                    {squareSize, squareSize},
                     ((j + k) % 2 == 0) ? BROWN : BEIGE
                 );
             }
@@ -215,4 +208,12 @@ void Window::loadSprites(){
 
 void Window::updateBoard() {
     render();
+}
+
+void Window::movePiece() {
+    auto square = getSquare(GetMousePosition());
+    if(!game.isEmpty({square.first, square.second})){
+        auto moves = game.getPiece({square.first, square.second})->getValidMoves();
+        game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
+    }
 }
