@@ -80,15 +80,7 @@ void Window::pollEvents(){
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         std::cout << "Mouse clicked " << std::endl;
         auto square = getSquare(GetMousePosition());
-        game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}); // Example move, replace with actual logic
-        updateBoard();
-
-        // cout all piece positions on the board
-        // auto pieces = game.getPieces();
-        // std::cout << "Current pieces on the board:" << std::endl;
-        // for (const auto& piece : pieces) {
-        //     std::cout << "Piece at (" << piece.first.row << ", " << piece.first.column << ") with type " << piece.second << std::endl;
-        // }
+        game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}, [this]() { updateBoard(); });
     }
 
 }

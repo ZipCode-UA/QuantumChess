@@ -16,8 +16,7 @@
 #include "king.h"
 #include "window.h"
 #include <optional>
-
-#include <iostream>
+#include <functional>
 
 Board::Board(){
     resetBoard();
@@ -62,10 +61,12 @@ void Board::resetBoard(){
     }
 }
 
-void Board::movePiece(Pos from, Pos to) {
+void Board::movePiece(Pos from, Pos to, std::function<void()> updateBoard) {
     if (pieces[from.row][from.column] != nullptr) {
         pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
         pieces[to.row][to.column]->setPosition(to);
         pieces[from.row][from.column] = nullptr;
     }
+
+    updateBoard();
 }

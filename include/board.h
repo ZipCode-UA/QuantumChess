@@ -12,6 +12,7 @@
 #include "piece.h"
 #include <memory>
 #include <vector>
+#include <functional>
 
 class Board{
 private:
@@ -24,7 +25,7 @@ public:
 
     std::vector<std::pair<Pos, int>> getPieces();
 
-    void movePiece(Pos from, Pos to);
+    void movePiece(Pos from, Pos to, std::function<void()> updateBoard );
 };
 
 #endif
