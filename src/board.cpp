@@ -65,7 +65,6 @@ void Board::resetBoard(){
 void Board::movePiece(Pos from, Pos to) {
     if (pieces[from.row][from.column] != nullptr) {
         pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
-        std::cout << "now there should be a piece at (" << to.row << ", " << to.column << ")\n";
         pieces[to.row][to.column]->setPosition(to);
         pieces[from.row][from.column] = nullptr;
     }
