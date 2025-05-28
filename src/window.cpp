@@ -78,10 +78,12 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        auto square = getSquare(GetMousePosition());
-        game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}, [this]() { updateBoard(); });
+        // Moving piece
+        {
+            auto square = getSquare(GetMousePosition());
+            game.movePiece({square.first, square.second}, {square.first + 1, square.second + 1}, [this]() { updateBoard(); });
+        }
     }
-
 }
 
 /*
