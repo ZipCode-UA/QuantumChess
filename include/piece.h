@@ -14,6 +14,7 @@
 
 class Piece{
 protected:
+    // Assuming this is the piece's color
     SquareColor color;
     Pos pos;
 public:
@@ -23,11 +24,9 @@ public:
 
     SquareColor getColor() const;
 
-    virtual void getValidMoves() = 0;
+    virtual std::pair<int, int> getValidMoves() = 0;
 
     virtual PieceID getType() const = 0;
-
-    virtual std::pair<int, int> movementPattern();
 
     void setPosition(Pos newPos);
 };

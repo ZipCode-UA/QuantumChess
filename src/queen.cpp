@@ -4,7 +4,7 @@ Queen::Queen(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void Queen::getValidMoves(){
+std::pair<int, int> Queen::getValidMoves(){
 
 }
 

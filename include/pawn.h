@@ -15,7 +15,7 @@ class Pawn : public Piece{
 public:
     Pawn(SquareColor c, Pos pos);
 
-    void getValidMoves() override;
+    std::pair<int, int> getValidMoves() override;
 
     PieceID getType() const override;
 };

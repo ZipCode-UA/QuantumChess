@@ -4,7 +4,7 @@ Knight::Knight(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void Knight::getValidMoves(){
+std::pair<int, int> Knight::getValidMoves(){
 
 }
 

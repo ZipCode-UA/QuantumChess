@@ -4,7 +4,7 @@ King::King(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void King::getValidMoves(){
+std::pair<int, int> King::getValidMoves(){
 
 }
 

@@ -15,7 +15,3 @@ SquareColor Piece::getColor() const{
 void Piece::setPosition(Pos newPos) {
     pos = newPos;
 }
-
-std::pair<int, int> Piece::movementPattern() {
-    return {1, 0}; // Default implementation, can be overridden by derived classes
-}

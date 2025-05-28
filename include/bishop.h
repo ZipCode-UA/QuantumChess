@@ -14,7 +14,9 @@
 class Bishop : public Piece{
 public:
     Bishop(SquareColor color, Pos pos);
-    void getValidMoves() override;
+
+    std::pair<int, int> getValidMoves() override;
+
     PieceID getType() const override;
 };
 

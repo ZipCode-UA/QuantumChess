@@ -4,7 +4,7 @@ Bishop::Bishop(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void Bishop::getValidMoves(){
+std::pair<int, int> Bishop::getValidMoves(){
 
 }
 

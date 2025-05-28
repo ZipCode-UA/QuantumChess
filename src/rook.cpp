@@ -4,7 +4,7 @@ Rook::Rook(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void Rook::getValidMoves(){
+std::pair<int, int> Rook::getValidMoves(){
 
 }
 
