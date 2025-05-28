@@ -7,6 +7,7 @@
 */
 
 #include "boardInterface.h"
+#include "window.h"
 
 /*
     Initializer for BoardInterface

@@ -8,6 +8,7 @@
 
 #include "window.h"
 #include "raymath.h"
+#include "boardInterface.h"
 #include <iostream>
 
 /*
@@ -60,6 +61,9 @@ void Window::render(){
         // Testing Moving Pieces With Mouse
         // drawPiece(9, GetMousePosition(), true);
 
+        // Highlighting a square
+        highlightSquare();
+
     EndDrawing();
 }
 
@@ -77,6 +81,7 @@ void Window::pollEvents(){
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         // Do Something
     }
+
 }
 
 /*
@@ -90,7 +95,7 @@ void Window::run(){
 }
 
 /*
-    Get corrospoding square by cursor position
+    Get corresponding square by cursor position
 
     @param cursorPosition 2d vector representing cursor position
     @return index of cell clicked
@@ -104,10 +109,10 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
     }
 
     // Get the square
-    int cursorSquareX = (cursorPosition.x - boardStart.x) / squareSize;
     int cursorSquareY = (cursorPosition.y - boardStart.y) / squareSize;
+    int cursorSquareX = (cursorPosition.x - boardStart.x) / squareSize;
 
-    return {cursorSquareX, cursorSquareY};
+    return {cursorSquareY, cursorSquareX};
 }
 
 /*
@@ -115,8 +120,8 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 */
 Vector2 Window::getSquarePosition(std::pair<int, int> square){
     return {
-        (7 - square.second) * boardWidth/8 + boardStart.x,
-        (7 - square.first) * boardWidth/8 + boardStart.y
+        ( square.second) * boardWidth/8 + boardStart.x,
+        ( square.first) * boardWidth/8 + boardStart.y
     };
 }
 
@@ -176,6 +181,15 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
         0.0f,
         WHITE
     );
+}
+
+void Window::highlightSquare(){
+    Vector2 cursorPosition = GetMousePosition();
+    auto square = getSquare(cursorPosition);
+    if (square.first != -1 && square.second != -1) {
+        Vector2 squarePos = getSquarePosition(square);
+        DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
+    }
 }
 
 void Window::loadSprites(){

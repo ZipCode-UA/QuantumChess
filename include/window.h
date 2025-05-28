@@ -46,7 +46,7 @@ private:
     void pollEvents();
 
     /*
-        Get corrospoding square by cursor position
+        Get corresponding square by cursor position
 
         @param cursorPosition 2d vector representing cursor position
         @return index of cell clicked
@@ -74,6 +74,9 @@ private:
     */
     void drawPiece(int pieceKey, Vector2 pos, bool center = false);
 
+    // highlight the square that the user is hovering over
+    void highlightSquare();
+
 public:
     /*
         Initializer for window class
@@ -89,7 +92,6 @@ public:
         Main loop for program
     */
     void run();
-
 
 };
 
