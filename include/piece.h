@@ -10,6 +10,7 @@
 #define PIECE_H
 
 #include "types.h"
+#include <utility>
 
 class Piece{
 protected:
@@ -25,6 +26,8 @@ public:
     virtual void getValidMoves() = 0;
 
     virtual PieceID getType() const = 0;
+
+    virtual std::pair<int, int> movementPattern();
 
     void setPosition(Pos newPos);
 };
