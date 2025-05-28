@@ -94,6 +94,9 @@ public:
     */
     std::pair<int, int> getSquare(Vector2 cursorPosition);
 
+    // public method to update the board
+    void updateBoard();
+
 };
 
 #endif

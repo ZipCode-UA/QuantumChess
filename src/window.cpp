@@ -78,7 +78,16 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        // Do Something
+        std::cout << "Mouse clicked " << std::endl;
+        game.movePiece({1, 1}, {5, 5}); // Example move, replace with actual logic
+        updateBoard();
+
+        // cout all piece positions on the board
+        auto pieces = game.getPieces();
+        std::cout << "Current pieces on the board:" << std::endl;
+        for (const auto& piece : pieces) {
+            std::cout << "Piece at (" << piece.first.row << ", " << piece.first.column << ") with type " << piece.second << std::endl;
+        }
     }
 
 }
@@ -206,4 +215,8 @@ void Window::loadSprites(){
     sprites[rook + 6] = LoadTexture("../assets/br.png");
     sprites[queen + 6] = LoadTexture("../assets/bq.png");
     sprites[king + 6] = LoadTexture("../assets/bk.png");
+}
+
+void Window::updateBoard() {
+    render();
 }

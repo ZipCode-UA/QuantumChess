@@ -14,7 +14,10 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
+#include "window.h"
 #include <optional>
+
+#include <iostream>
 
 Board::Board(){
     resetBoard();
@@ -60,8 +63,15 @@ void Board::resetBoard(){
 }
 
 void Board::movePiece(Pos from, Pos to) {
+    std::cout << "Moving piece from (" << from.row << ", " << from.column << ") to (" << to.row << ", " << to.column << ")\n";
     if (pieces[from.row][from.column] != nullptr) {
+        std::cout << "Piece found at source position.\n";
         pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
         pieces[from.row][from.column] = nullptr;
     }
+
+    // update pieces
+    // gameWindow.updateBoard();
+    // std::cout << "Piece moved successfully.\n";
+
 }
