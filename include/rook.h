@@ -10,12 +10,14 @@
 #define ROOK_H
 
 #include "piece.h"
+#include <utility>
+#include <vector>
 
 class Rook : public Piece {
 public:
     Rook(SquareColor color, Pos pos);
 
-    std::pair<int, int> getValidMoves() override;
+    std::vector<std::pair<int, int>> getValidMoves() override;
 
     PieceID getType() const override;
 };
