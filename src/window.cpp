@@ -214,6 +214,7 @@ void Window::movePiece() {
     auto square = getSquare(GetMousePosition());
     if(!game.isEmpty({square.first, square.second})){
         auto moves = game.getPiece({square.first, square.second})->getValidMoves()[0];
+        displayMoves();
         game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
     }
 }
