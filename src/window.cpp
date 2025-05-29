@@ -221,13 +221,17 @@ void Window::movePiece() {
 
 void Window::displayMoves() {
     auto square = getSquare(GetMousePosition());
-    if (square.first != -1 && square.second != -1) {
-        auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
-        if (validMoves.size() > 0) {
-            for (const auto& move : validMoves) {
-                Vector2 pos = getSquarePosition(move);
-                DrawRectangleV(pos, {boardWidth/8, boardWidth/8}, Fade(GREEN, 0.5f));
-            }
-        }
+    auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
+
+    if (square.first == -1 || square.second == -1) {
+        return;
+    }
+    if (validMoves.size() <= 0) {
+        return;
+    }
+
+    for (const auto& move : validMoves) {
+        Vector2 pos = getSquarePosition(move);
+        DrawRectangleV(pos, {boardWidth/8, boardWidth/8}, Fade(GREEN, 0.5f));
     }
 }
