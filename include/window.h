@@ -72,6 +72,8 @@ private:
 
     void movePiece();
 
+    void displayMoves();
+
 public:
     /*
         Initializer for window class
