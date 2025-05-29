@@ -7,10 +7,17 @@ Rook::Rook(SquareColor color, Pos position) : Piece(color, position) {
 }
 
 std::vector<std::pair<int, int>> Rook::getValidMoves(){
-    if(color == White){
-        return {{3, 0}};
+    std::vector<std::pair<int, int>> validMoves;
+
+    // Horizontal and vertical moves
+    for (int i = 1; i <= 7; ++i) {
+        validMoves.push_back({i, 0});      // Right
+        validMoves.push_back({-i, 0});     // Left
+        validMoves.push_back({0, i});      // Down
+        validMoves.push_back({0, -i});     // Up
     }
-    return {{-3, 0}};
+
+    return {validMoves};
 }
 
 PieceID Rook::getType() const{
