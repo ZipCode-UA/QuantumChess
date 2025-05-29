@@ -7,11 +7,16 @@ Bishop::Bishop(SquareColor color, Pos position) : Piece(color, position) {
 }
 
 std::vector<std::pair<int, int>> Bishop::getValidMoves(){
-    if(color == White){
-        return {{2, 2}};
-    }
+    std::vector<std::pair<int, int>> validMoves;
 
-    return {{-2, -2}};
+    // Diagonal moves
+    for (int i = 1; i <= 7; ++i) {
+        validMoves.push_back({i, i});      // Down-right
+        validMoves.push_back({i, -i});     // Down-left
+        validMoves.push_back({-i, i});     // Up-right
+        validMoves.push_back({-i, -i});    // Up-left
+    }
+    return {validMoves};
 }
 
 PieceID Bishop::getType() const{
