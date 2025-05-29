@@ -41,7 +41,7 @@ private:
     void render();
 
     /*
-        poll events for 
+        poll events for
     */
     void pollEvents();
 
@@ -59,6 +59,7 @@ private:
     void resizedWindow();
 
     /*
+        get the position in the window of a square by index
     */
     Vector2 getSquarePosition(std::pair<int, int> square);
 
@@ -77,6 +78,8 @@ private:
     // highlight the square that the user is hovering over
     void highlightSquare();
 
+    void movePiece();
+
 public:
     /*
         Initializer for window class
@@ -92,6 +95,17 @@ public:
         Main loop for program
     */
     void run();
+
+    /*
+        Get corresponding square by cursor position
+
+        @param cursorPosition 2d vector representing cursor position
+        @return index of cell clicked
+    */
+    std::pair<int, int> getSquare(Vector2 cursorPosition);
+
+    // public method to update the board
+    void updateBoard();
 
 };
 

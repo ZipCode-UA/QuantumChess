@@ -4,8 +4,11 @@ Queen::Queen(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-void Queen::getValidMoves(){
-
+std::pair<int, int> Queen::getValidMoves(){
+    if(color == White){
+        return {3, 0};
+    }
+    return {-3, 0};
 }
 
 PieceID Queen::getType() const{

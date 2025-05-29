@@ -7,7 +7,10 @@
 */
 
 #include "window.h"
+#include "boardInterface.h"
+#include "board.h"
 #include "raymath.h"
+#include "raylib.h"
 #include "boardInterface.h"
 #include <iostream>
 
@@ -58,8 +61,8 @@ void Window::render(){
             drawPiece(cur.second, getSquarePosition({cur.first.row, cur.first.column}));
         }
 
-        // Testing Moving Pieces With Mouse
-        // drawPiece(9, GetMousePosition(), true);
+        // highlighting a square
+        highlightSquare();
 
         // Highlighting a square
         highlightSquare();
@@ -79,7 +82,7 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        // Do Something
+        movePiece();
     }
 
 }
@@ -155,8 +158,8 @@ void Window::createBoardTexture(){
         for(int j = 0; j < 8; ++j){
             for (int k = 0; k < 8; ++k){
                 DrawRectangleV(
-                    Vector2Add(boardStart, {j*squareSize, k*squareSize}), 
-                    {squareSize, squareSize}, 
+                    Vector2Add(boardStart, {j*squareSize, k*squareSize}),
+                    {squareSize, squareSize},
                     ((j + k) % 2 == 0) ? BROWN : BEIGE
                 );
             }
@@ -184,8 +187,7 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
 }
 
 void Window::highlightSquare(){
-    Vector2 cursorPosition = GetMousePosition();
-    auto square = getSquare(cursorPosition);
+    auto square = getSquare(GetMousePosition());
     if (square.first != -1 && square.second != -1) {
         Vector2 squarePos = getSquarePosition(square);
         DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
@@ -207,4 +209,16 @@ void Window::loadSprites(){
     sprites[rook + 6] = LoadTexture("../assets/br.png");
     sprites[queen + 6] = LoadTexture("../assets/bq.png");
     sprites[king + 6] = LoadTexture("../assets/bk.png");
+}
+
+void Window::updateBoard() {
+    render();
+}
+
+void Window::movePiece() {
+    auto square = getSquare(GetMousePosition());
+    if(!game.isEmpty({square.first, square.second})){
+        auto moves = game.getPiece({square.first, square.second})->getValidMoves();
+        game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
+    }
 }

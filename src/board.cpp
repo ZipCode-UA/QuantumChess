@@ -14,12 +14,16 @@
 #include "knight.h"
 #include "queen.h"
 #include "king.h"
+#include "window.h"
 #include <optional>
+#include <functional>
+#include <stdexcept>
 
 Board::Board(){
     resetBoard();
 }
 
+// Returns a list of pieces on the Board. Stores position and type of each piece
 std::vector<std::pair<Pos, int>> Board::getPieces() {
     std::vector<std::pair<Pos, int>> pieceList;
     for (int i = 0; i < 8; ++i){
@@ -30,6 +34,13 @@ std::vector<std::pair<Pos, int>> Board::getPieces() {
         }
     }
     return pieceList;
+}
+
+std::unique_ptr<Piece>& Board::getPiece(Pos pos) {
+    if (pos.row < 0 || pos.row >= 8 || pos.column < 0 || pos.column >= 8) {
+        throw std::out_of_range("Position out of bounds");
+    }
+    return pieces[pos.row][pos.column];
 }
 
 void Board::resetBoard(){
@@ -56,4 +67,26 @@ void Board::resetBoard(){
             }
         }
     }
+}
+
+void Board::movePiece(Pos from, Pos to, std::function<void()> updateBoard) {
+    if(from.row < 0 || from.row >= 8 || from.column < 0 || from.column >= 8 ||
+        to.row < 0 || to.row >= 8 || to.column < 0 || to.column >= 8) {
+        return; // Invalid move
+    }
+    if (pieces[from.row][from.column] == nullptr) {
+        return; // No piece at the source position
+    }
+
+    if (pieces[from.row][from.column] != nullptr) {
+        pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
+        pieces[to.row][to.column]->setPosition(to);
+        pieces[from.row][from.column] = nullptr;
+    }
+
+    updateBoard();
+}
+
+bool Board::isEmpty(Pos pos) {
+    return pieces[pos.row][pos.column] == nullptr;
 }

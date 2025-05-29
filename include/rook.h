@@ -15,7 +15,7 @@ class Rook : public Piece {
 public:
     Rook(SquareColor color, Pos pos);
 
-    void getValidMoves() override;
+    std::pair<int, int> getValidMoves() override;
 
     PieceID getType() const override;
 };

@@ -10,9 +10,11 @@
 #define PIECE_H
 
 #include "types.h"
+#include <utility>
 
 class Piece{
 protected:
+    // Assuming this is the piece's color
     SquareColor color;
     Pos pos;
 public:
@@ -22,10 +24,11 @@ public:
 
     SquareColor getColor() const;
 
-    virtual void getValidMoves() = 0;
+    virtual std::pair<int, int> getValidMoves() = 0;
 
     virtual PieceID getType() const = 0;
 
+    void setPosition(Pos newPos);
 };
 
 #endif

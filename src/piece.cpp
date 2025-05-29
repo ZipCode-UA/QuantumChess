@@ -11,3 +11,7 @@ Pos Piece::getPosition() const{
 SquareColor Piece::getColor() const{
     return color;
 }
+
+void Piece::setPosition(Pos newPos) {
+    pos = newPos;
+}
