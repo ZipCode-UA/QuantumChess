@@ -20,6 +20,7 @@ std::vector<std::pair<int, int>> Pawn::getValidMoves(){
         pair diagonalLeft = {1, -1};
         return {down, diagonalRight, diagonalLeft};
     }
+
     pair up = {-1, 0};
     pair diagonalRight = {-1, 1};
     pair diagonalLeft = {-1, -1};
