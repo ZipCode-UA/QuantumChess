@@ -212,7 +212,10 @@ void Window::updateBoard() {
 
 void Window::movePiece() {
     auto square = getSquare(GetMousePosition());
-    if(!game.isEmpty({square.first, square.second})){
+    if(square.first == -1 || square.second == -1)
+        return;
+
+        if(!game.isEmpty({square.first, square.second})){
         auto moves = game.getPiece({square.first, square.second})->getValidMoves()[0];
         displayMoves();
         game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
@@ -221,14 +224,12 @@ void Window::movePiece() {
 
 void Window::displayMoves() {
     auto square = getSquare(GetMousePosition());
-    if (square.first == -1 || square.second == -1) {
+    if (square.first == -1 || square.second == -1)
         return;
-    }
 
     auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
-    if (validMoves.size() <= 0) {
+    if (validMoves.size() <= 0)
         return;
-    }
 
     for (const auto& move : validMoves) {
         Vector2 pos = getSquarePosition(move);
