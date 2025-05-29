@@ -9,8 +9,23 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-class GameState{
+#include "types.h"
 
+class GameState{
+private:
+    SquareColor turn;
+    States state;
+
+public:
+    GameState() : turn(White), state(pickPiece) {}
+
+    SquareColor getTurn() const;
+
+    int next();
+
+    States getState() const;
+
+    void setState(States newState);
 };
 
 #endif

@@ -30,4 +30,10 @@ struct MovePair{
     Move m2;
 };
 
+enum States {
+    pickPiece,
+    pickSquare,
+    movePiece
+};
+
 #endif
