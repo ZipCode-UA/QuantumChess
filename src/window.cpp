@@ -221,11 +221,11 @@ void Window::movePiece() {
 
 void Window::displayMoves() {
     auto square = getSquare(GetMousePosition());
-    auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
-
     if (square.first == -1 || square.second == -1) {
         return;
     }
+
+    auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
     if (validMoves.size() <= 0) {
         return;
     }
