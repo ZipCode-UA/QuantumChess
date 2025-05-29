@@ -244,6 +244,11 @@ void Window::setDisplayMoves() {
         int upDown = move.first + square.first;
         int leftRight = move.second + square.second;
 
+        // if the move is out of bounds, skip it
+        if (upDown < 0 || upDown >= 8 || leftRight < 0 || leftRight >= 8) {
+            continue;
+        }
+
         Vector2 pos = getSquarePosition({upDown, leftRight});
         validMovePositions.push_back(pos);
     }
