@@ -10,6 +10,8 @@
 #define BISHOP_H
 
 #include "piece.h"
+#include <utility>
+#include <vector>
 
 class Bishop : public Piece{
 public:

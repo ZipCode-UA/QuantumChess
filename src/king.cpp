@@ -1,4 +1,6 @@
 #include "king.h"
+#include <utility>
+#include <vector>
 
 King::King(SquareColor color, Pos position) : Piece(color, position) {
 

@@ -1,4 +1,6 @@
 #include "queen.h"
+#include <utility>
+#include <vector>
 
 Queen::Queen(SquareColor color, Pos position) : Piece(color, position) {
 

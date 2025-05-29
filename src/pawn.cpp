@@ -1,5 +1,6 @@
 #include "pawn.h"
 #include <utility>
+#include <vector>
 
 Pawn::Pawn(SquareColor color, Pos position) : Piece(color, position) {
 

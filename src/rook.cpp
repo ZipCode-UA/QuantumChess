@@ -1,4 +1,6 @@
 #include "rook.h"
+#include <utility>
+#include <vector>
 
 Rook::Rook(SquareColor color, Pos position) : Piece(color, position) {
 

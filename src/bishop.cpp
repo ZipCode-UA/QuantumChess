@@ -1,4 +1,6 @@
 #include "bishop.h"
+#include <utility>
+#include <vector>
 
 Bishop::Bishop(SquareColor color, Pos position) : Piece(color, position) {
 

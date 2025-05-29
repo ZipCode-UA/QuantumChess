@@ -1,4 +1,6 @@
 #include "knight.h"
+#include <utility>
+#include <vector>
 
 Knight::Knight(SquareColor color, Pos position) : Piece(color, position) {
 
