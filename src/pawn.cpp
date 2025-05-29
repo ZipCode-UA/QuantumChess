@@ -12,10 +12,18 @@ Pawn::Pawn(SquareColor color, Pos position) : Piece(color, position) {
     therefore the function would return {1, 0}
 */
 std::vector<std::pair<int, int>> Pawn::getValidMoves(){
+    using pair = std::pair<int, int>;
+
     if(color == White){
-        return {{1, 0}};
+        pair down = {1, 0};
+        pair diagonalRight = {1, 1};
+        pair diagonalLeft = {1, -1};
+        return {down, diagonalRight, diagonalLeft};
     }
-    return {{-1, 0}};
+    pair up = {-1, 0};
+    pair diagonalRight = {-1, 1};
+    pair diagonalLeft = {-1, -1};
+    return {up, diagonalRight, diagonalLeft};
 }
 
 PieceID Pawn::getType() const{
