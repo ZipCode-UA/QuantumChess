@@ -10,12 +10,14 @@
 #define KING_H
 
 #include "piece.h"
+#include <utility>
+#include <vector>
 
 class King : public Piece{
 public:
     King(SquareColor c, Pos pos);
 
-    std::pair<int, int> getValidMoves() override;
+    std::vector<std::pair<int, int>> getValidMoves() override;
 
     PieceID getType() const override;
 };

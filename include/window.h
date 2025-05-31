@@ -29,6 +29,8 @@ private:
 
     Board game;
 
+    std::vector<Vector2> validMovePositions;
+
     void loadSprites();
 
     /*
@@ -71,6 +73,8 @@ private:
     void highlightSquare();
 
     void movePiece();
+
+    void setDisplayMoves();
 
 public:
     /*

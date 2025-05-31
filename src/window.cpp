@@ -64,8 +64,10 @@ void Window::render(){
         // highlighting a square
         highlightSquare();
 
-        // Highlighting a square
-        highlightSquare();
+        // draw valid moves
+        for (const auto& pos : validMovePositions) {
+            DrawCircleV({pos.x + boardWidth/16, pos.y + boardWidth/16}, boardWidth/20, Fade(GREEN, 0.5f));
+        }
 
     EndDrawing();
 }
@@ -217,8 +219,39 @@ void Window::updateBoard() {
 
 void Window::movePiece() {
     auto square = getSquare(GetMousePosition());
+    if(square.first == -1 || square.second == -1)
+        return;
+
     if(!game.isEmpty({square.first, square.second})){
-        auto moves = game.getPiece({square.first, square.second})->getValidMoves();
+        auto moves = game.getPiece({square.first, square.second})->getValidMoves()[0];
+        setDisplayMoves();
         game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
+    }
+}
+
+void Window::setDisplayMoves() {
+    if (validMovePositions.size() > 0) {
+        validMovePositions.clear();
+    }
+
+    auto square = getSquare(GetMousePosition());
+    if (square.first == -1 || square.second == -1)
+        return;
+
+    auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
+    if (validMoves.size() <= 0)
+        return;
+
+    for (const auto& move : validMoves) {
+        int upDown = move.first + square.first;
+        int leftRight = move.second + square.second;
+
+        // if the move is out of bounds, skip it
+        if (upDown < 0 || upDown >= 8 || leftRight < 0 || leftRight >= 8) {
+            continue;
+        }
+
+        Vector2 pos = getSquarePosition({upDown, leftRight});
+        validMovePositions.push_back(pos);
     }
 }

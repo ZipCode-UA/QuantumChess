@@ -10,12 +10,14 @@
 #define QUEEN_H
 
 #include "piece.h"
+#include <utility>
+#include <vector>
 
 class Queen : public Piece{
 public:
     Queen(SquareColor c, Pos pos);
 
-    std::pair<int, int> getValidMoves() override;
+    std::vector<std::pair<int, int>> getValidMoves() override;
 
     PieceID getType() const override;
 };

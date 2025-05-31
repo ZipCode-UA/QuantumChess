@@ -11,6 +11,7 @@
 
 #include "types.h"
 #include <utility>
+#include <vector>
 
 class Piece{
 protected:
@@ -24,7 +25,7 @@ public:
 
     SquareColor getColor() const;
 
-    virtual std::pair<int, int> getValidMoves() = 0;
+    virtual std::vector<std::pair<int, int>> getValidMoves() = 0;
 
     virtual PieceID getType() const = 0;
 
