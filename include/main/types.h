@@ -31,9 +31,12 @@ struct MovePair{
 };
 
 enum States {
-    pickPiece,
-    pickSquare,
-    movePiece
+    pickPieceFirst,
+    pickSquareFirst,
+    pickPieceSecond,
+    pickSquareSecond,
+    movePieces,
+    waitingForOpponent
 };
 
 #endif

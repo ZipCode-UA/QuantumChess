@@ -17,7 +17,7 @@ private:
     States state;
 
 public:
-    GameState() : turn(White), state(pickPiece) {}
+    GameState() : turn(White), state(pickPieceFirst) {}
 
     SquareColor getTurn() const;
 
