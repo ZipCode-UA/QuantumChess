@@ -11,6 +11,7 @@
 #include "board.h"
 #include "raymath.h"
 #include "raylib.h"
+#include "boardInterface.h"
 #include <iostream>
 
 /*
@@ -85,6 +86,7 @@ void Window::pollEvents(){
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         movePiece();
     }
+
 }
 
 /*
