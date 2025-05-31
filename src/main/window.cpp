@@ -11,10 +11,7 @@
 #include "board.h"
 #include "raymath.h"
 #include "raylib.h"
-<<<<<<< HEAD:src/window.cpp
-=======
 #include "boardInterface.h"
->>>>>>> main:src/main/window.cpp
 #include <iostream>
 
 /*
