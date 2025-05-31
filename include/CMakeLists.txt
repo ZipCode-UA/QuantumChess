@@ -2,13 +2,6 @@ set(includes
     "window.h"
     "gameState.h"
     "board.h"
-    "piece.h"
-    "king.h"
-    "queen.h"
-    "rook.h"
-    "bishop.h"
-    "knight.h"
-    "pawn.h"
     "boardInterface.h"
     "types.h"
 )

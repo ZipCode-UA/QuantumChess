@@ -1,0 +1,5 @@
+add_library(Pieces STATIC)
+file(GLOB SOURCES "src/*.cpp")
+target_sources(Pieces PUBLIC ${SOURCES})
+target_include_directories(Pieces PUBLIC include)
+target_link_libraries(Pieces PUBLIC src)
