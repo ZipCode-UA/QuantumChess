@@ -69,7 +69,7 @@ void Board::resetBoard(){
     }
 }
 
-void Board::movePiece(Pos from, Pos to, std::function<void()> updateBoard) {
+void Board::movePiece(Pos from, Pos to) {
     if(from.row < 0 || from.row >= 8 || from.column < 0 || from.column >= 8 ||
         to.row < 0 || to.row >= 8 || to.column < 0 || to.column >= 8) {
         return; // Invalid move
@@ -83,8 +83,6 @@ void Board::movePiece(Pos from, Pos to, std::function<void()> updateBoard) {
         pieces[to.row][to.column]->setPosition(to);
         pieces[from.row][from.column] = nullptr;
     }
-
-    updateBoard();
 }
 
 bool Board::isEmpty(Pos pos) {

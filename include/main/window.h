@@ -28,7 +28,7 @@ private:
     float boardWidth;
 
     Board game;
-    States gameState;
+    States gameState = States::pickPieceFirst;
     MovePair moves;
 
     std::vector<Vector2> validMovePositions;
@@ -74,11 +74,13 @@ private:
     void drawPiece(int pieceKey, Vector2 pos, bool center = false);
 
     // highlight the square that the user is hovering over
-    void highlightSquare();
+    void highlightSquare(Pos pos, Color color = BLUE);
 
     void movePiece();
 
     void setDisplayMoves();
+
+    void highlightMovesSelected();
 
 public:
     /*

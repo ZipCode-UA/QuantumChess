@@ -13,6 +13,7 @@
 #include "raylib.h"
 #include "boardInterface.h"
 #include <iostream>
+#include <random>
 
 /*
     Initializer for window class
@@ -26,8 +27,8 @@ Window::Window(){
     SetTargetFPS(30);
 
     createBoardTexture();
-
     loadSprites();
+
 }
 
 /*
@@ -62,7 +63,8 @@ void Window::render(){
         }
 
         // highlighting a square
-        highlightSquare();
+        highlightSquare(getSquare(GetMousePosition()));
+        highlightMovesSelected();
 
         // draw valid moves
         for (const auto& pos : validMovePositions) {
@@ -70,6 +72,20 @@ void Window::render(){
         }
 
     EndDrawing();
+}
+
+void Window::highlightMovesSelected(){
+    switch (gameState)
+    {
+    case pickSquareSecond:
+        highlightSquare(moves.m2.start, PURPLE);
+    case pickPieceSecond:
+        highlightSquare(moves.m1.end, PURPLE);
+    case pickSquareFirst:
+        highlightSquare(moves.m1.start, PURPLE);
+    default:
+        break;
+    }
 }
 
 // @TODO implement poll event method
@@ -90,21 +106,42 @@ void Window::pollEvents(){
 }
 
 void Window::handleLeftMouseDown(){
+    auto squarePicked = getSquare(GetMousePosition());
     switch (gameState)
     {
     case pickPieceFirst:
-        
+        if (game.isEmpty(squarePicked)){
+            break;
+        }
+        moves.m1.start = squarePicked;
+        gameState = pickSquareFirst;
         break;
     case pickSquareFirst:
+        moves.m1.end = squarePicked;
+        gameState = pickPieceSecond;
         break;
     case pickPieceSecond:
+        if (game.isEmpty(squarePicked)){
+            break;
+        }
+        moves.m2.start = squarePicked;
+        gameState = pickSquareSecond;
         break;
     case pickSquareSecond:
+        moves.m2.end = squarePicked;
+        gameState = pickPieceFirst;
+
+        if ( std::rand() % 2 == 0 ){
+            game.movePiece(moves.m1.start, moves.m1.end);
+        }
+        else {
+            game.movePiece(moves.m2.start, moves.m2.end);
+        }
         break;
+
     default:
         break;
     }
-    movePiece();
 }
 
 /*
@@ -206,11 +243,10 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
     );
 }
 
-void Window::highlightSquare(){
-    auto square = getSquare(GetMousePosition());
-    if (square.row != -1 && square.column != -1) {
-        Vector2 squarePos = getSquarePosition(square);
-        DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
+void Window::highlightSquare(Pos pos, Color color){
+    if (pos.row != -1 && pos.column != -1) {
+        Vector2 squarePos = getSquarePosition(pos);
+        DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(color, 0.3f));
     }
 }
 
@@ -243,7 +279,7 @@ void Window::movePiece() {
     if(!game.isEmpty(square)){
         auto moves = game.getPiece(square)->getValidMoves()[0];
         setDisplayMoves();
-        game.movePiece(square, {square.row + moves.row, square.column + moves.column}, [this]() { updateBoard(); });
+        game.movePiece(square, {square.row + moves.row, square.column + moves.column});
     }
 }
 

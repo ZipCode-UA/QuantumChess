@@ -29,7 +29,7 @@ public:
     // returns a reference to the piece at the given position
     std::unique_ptr<Piece>& getPiece(Pos pos);
 
-    void movePiece(Pos from, Pos to, std::function<void()> updateBoard );
+    void movePiece(Pos from, Pos to);
 
     // Checks if the square on board is empty
     bool isEmpty(Pos pos);
