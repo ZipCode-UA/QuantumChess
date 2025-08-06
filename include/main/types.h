@@ -3,7 +3,8 @@
 
 enum SquareColor{
     White,
-    Black
+    Black,
+    InvalidColor
 };
 
 enum PieceID{
@@ -20,6 +21,15 @@ enum PieceID{
     BRook,
     BPawn,
     InvalidPiece
+};
+
+enum States {
+    pickPieceFirst,
+    pickSquareFirst,
+    pickPieceSecond,
+    pickSquareSecond,
+    movePieces,
+    waitingForOpponent
 };
 
 struct Pos{
@@ -43,15 +53,6 @@ struct Move{
 struct MovePair{
     Move m1;
     Move m2;
-};
-
-enum States {
-    pickPieceFirst,
-    pickSquareFirst,
-    pickPieceSecond,
-    pickSquareSecond,
-    movePieces,
-    waitingForOpponent
 };
 
 #endif

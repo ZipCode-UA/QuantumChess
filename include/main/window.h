@@ -47,6 +47,8 @@ private:
     */
     void render();
 
+    SquareColor getPieceColor(PieceID ID);
+
     /*
         poll events for
     */

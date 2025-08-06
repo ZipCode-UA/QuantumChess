@@ -53,7 +53,6 @@ void Window::render(){
     BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
 
         DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
@@ -65,6 +64,13 @@ void Window::render(){
         // highlighting a square
         highlightSquare(getSquare(GetMousePosition()));
         highlightMovesSelected();
+
+        std::string playerTurnString;
+        if (currentPlayer == White)
+            playerTurnString = "White's Turn";
+        else if (currentPlayer == Black)
+            playerTurnString = "Black's Turn";
+        DrawText(playerTurnString.c_str(), 20, 20, 40, BLACK);
 
         // draw valid moves
         for (const auto& pos : validMovePositions) {
@@ -107,10 +113,11 @@ void Window::pollEvents(){
 
 void Window::handleLeftMouseDown(){
     auto squarePicked = getSquare(GetMousePosition());
+
     switch (gameState)
     {
     case pickPieceFirst:
-        if (game.isEmpty(squarePicked)){
+        if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
             break;
         }
         moves.m1.start = squarePicked;
@@ -121,7 +128,7 @@ void Window::handleLeftMouseDown(){
         gameState = pickPieceSecond;
         break;
     case pickPieceSecond:
-        if (game.isEmpty(squarePicked)){
+        if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
             break;
         }
         moves.m2.start = squarePicked;
@@ -135,6 +142,11 @@ void Window::handleLeftMouseDown(){
             gameState = pickPieceSecond;
             break;
         }
+
+        if (currentPlayer == White)
+            currentPlayer = Black;
+        else 
+            currentPlayer = White;
 
         if ( std::rand() % 2 == 0 ){
             game.movePiece(moves.m1);
@@ -275,4 +287,12 @@ void Window::loadSprites(){
 void Window::updateBoard() {
     render();
 }
-
+ 
+SquareColor Window::getPieceColor(PieceID ID) {
+    if (ID >= 0 && ID <= 5)
+        return White;
+    if (ID >= 6 && ID <= 11)
+        return Black;
+    else
+        return InvalidColor;
+}
