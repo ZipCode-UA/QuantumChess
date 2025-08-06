@@ -6,20 +6,19 @@ Knight::Knight(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-std::vector<std::pair<int, int>> Knight::getValidMoves(){
-    using pair = std::pair<int, int>;
+std::vector<Pos> Knight::getValidMoves(){
 
-    pair downRight = {2, 1};
-    pair downLeft = {2, -1};
+    Pos downRight = {2, 1};
+    Pos downLeft = {2, -1};
 
-    pair rightUp = {-1, 2};
-    pair rightDown = {1, 2};
+    Pos rightUp = {-1, 2};
+    Pos rightDown = {1, 2};
 
-    pair leftUp = {-1, -2};
-    pair leftDown = {1, -2};
+    Pos leftUp = {-1, -2};
+    Pos leftDown = {1, -2};
 
-    pair upRight = {-2, 1};
-    pair upLeft = {-2, -1};
+    Pos upRight = {-2, 1};
+    Pos upLeft = {-2, -1};
 
     return {
         downRight, downLeft,

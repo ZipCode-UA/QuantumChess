@@ -6,8 +6,8 @@ Rook::Rook(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-std::vector<std::pair<int, int>> Rook::getValidMoves(){
-    std::vector<std::pair<int, int>> validMoves;
+std::vector<Pos> Rook::getValidMoves(){
+    std::vector<Pos> validMoves;
 
     // Horizontal and vertical moves
     for (int i = 1; i <= 7; ++i) {

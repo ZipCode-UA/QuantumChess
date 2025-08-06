@@ -6,8 +6,8 @@ Bishop::Bishop(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-std::vector<std::pair<int, int>> Bishop::getValidMoves(){
-    std::vector<std::pair<int, int>> validMoves;
+std::vector<Pos> Bishop::getValidMoves(){
+    std::vector<Pos> validMoves;
 
     // Diagonal moves
     for (int i = 1; i <= 7; ++i) {

@@ -59,7 +59,7 @@ private:
     /*
         get the position in the window of a square by index
     */
-    Vector2 getSquarePosition(std::pair<int, int> square);
+    Vector2 getSquarePosition(Pos square);
 
     /*
         Creates board texture
@@ -102,7 +102,7 @@ public:
         @param cursorPosition 2d vector representing cursor position
         @return index of cell clicked
     */
-    std::pair<int, int> getSquare(Vector2 cursorPosition);
+    Pos getSquare(Vector2 cursorPosition);
 
     // public method to update the board
     void updateBoard();

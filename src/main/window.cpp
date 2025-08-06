@@ -58,7 +58,7 @@ void Window::render(){
 
         auto pieces = game.getPieces();
         for (auto cur : pieces){
-            drawPiece(cur.second, getSquarePosition({cur.first.row, cur.first.column}));
+            drawPiece(cur.second, getSquarePosition(cur.first));
         }
 
         // highlighting a square
@@ -123,7 +123,7 @@ void Window::run(){
     @param cursorPosition 2d vector representing cursor position
     @return index of cell clicked
 */
-std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
+Pos Window::getSquare(Vector2 cursorPosition){
     int squareSize = boardWidth/8;
 
     // Check if cursor is within the board
@@ -141,10 +141,10 @@ std::pair<int, int> Window::getSquare(Vector2 cursorPosition){
 /*
     get the position in the window of a square by index
 */
-Vector2 Window::getSquarePosition(std::pair<int, int> square){
+Vector2 Window::getSquarePosition(Pos square){
     return {
-        ( square.second) * boardWidth/8 + boardStart.x,
-        ( square.first) * boardWidth/8 + boardStart.y
+        ( square.column) * boardWidth/8 + boardStart.x,
+        ( square.row) * boardWidth/8 + boardStart.y
     };
 }
 
@@ -208,7 +208,7 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
 
 void Window::highlightSquare(){
     auto square = getSquare(GetMousePosition());
-    if (square.first != -1 && square.second != -1) {
+    if (square.row != -1 && square.column != -1) {
         Vector2 squarePos = getSquarePosition(square);
         DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
     }
@@ -237,13 +237,13 @@ void Window::updateBoard() {
 
 void Window::movePiece() {
     auto square = getSquare(GetMousePosition());
-    if(square.first == -1 || square.second == -1)
+    if(square.row == -1 || square.row == -1)
         return;
 
-    if(!game.isEmpty({square.first, square.second})){
-        auto moves = game.getPiece({square.first, square.second})->getValidMoves()[0];
+    if(!game.isEmpty(square)){
+        auto moves = game.getPiece(square)->getValidMoves()[0];
         setDisplayMoves();
-        game.movePiece({square.first, square.second}, {square.first + moves.first, square.second + moves.second}, [this]() { updateBoard(); });
+        game.movePiece(square, {square.row + moves.row, square.column + moves.column}, [this]() { updateBoard(); });
     }
 }
 
@@ -253,16 +253,16 @@ void Window::setDisplayMoves() {
     }
 
     auto square = getSquare(GetMousePosition());
-    if (square.first == -1 || square.second == -1)
+    if (square.row == -1 || square.column == -1)
         return;
 
-    auto validMoves = game.getPiece({square.first, square.second})->getValidMoves();
+    auto validMoves = game.getPiece(square)->getValidMoves();
     if (validMoves.size() <= 0)
         return;
 
     for (const auto& move : validMoves) {
-        int upDown = move.first + square.first;
-        int leftRight = move.second + square.second;
+        int upDown = move.row + square.row;
+        int leftRight = move.column + square.column;
 
         // if the move is out of bounds, skip it
         if (upDown < 0 || upDown >= 8 || leftRight < 0 || leftRight >= 8) {

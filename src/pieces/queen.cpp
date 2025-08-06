@@ -6,8 +6,8 @@ Queen::Queen(SquareColor color, Pos position) : Piece(color, position) {
 
 }
 
-std::vector<std::pair<int, int>> Queen::getValidMoves(){
-    std::vector<std::pair<int, int>> validMoves;
+std::vector<Pos> Queen::getValidMoves(){
+    std::vector<Pos> validMoves;
 
     // Horizontal and vertical moves
     for (int i = 1; i <= 7; ++i) {

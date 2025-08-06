@@ -17,7 +17,7 @@ class Queen : public Piece{
 public:
     Queen(SquareColor c, Pos pos);
 
-    std::vector<std::pair<int, int>> getValidMoves() override;
+    std::vector<Pos> getValidMoves() override;
 
     PieceID getType() const override;
 };
