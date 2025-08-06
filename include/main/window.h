@@ -28,6 +28,9 @@ private:
     float boardWidth;
 
     Board game;
+    States gameState = States::pickPieceFirst;
+    MovePair moves;
+    SquareColor currentPlayer = White;
 
     std::vector<Vector2> validMovePositions;
 
@@ -37,10 +40,14 @@ private:
         based on screenWidth and Screen Height determines board width and start and end positions
     */
 
+    void handleLeftMouseDown();
+
     /*
         Render window
     */
     void render();
+
+    SquareColor getPieceColor(PieceID ID);
 
     /*
         poll events for
@@ -70,11 +77,9 @@ private:
     void drawPiece(int pieceKey, Vector2 pos, bool center = false);
 
     // highlight the square that the user is hovering over
-    void highlightSquare();
+    void highlightSquare(Pos pos, Color color = BLUE);
 
-    void movePiece();
-
-    void setDisplayMoves();
+    void highlightMovesSelected();
 
 public:
     /*

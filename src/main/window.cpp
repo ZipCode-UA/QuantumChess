@@ -13,6 +13,7 @@
 #include "raylib.h"
 #include "boardInterface.h"
 #include <iostream>
+#include <random>
 
 /*
     Initializer for window class
@@ -26,8 +27,8 @@ Window::Window(){
     SetTargetFPS(30);
 
     createBoardTexture();
-
     loadSprites();
+
 }
 
 /*
@@ -52,7 +53,6 @@ void Window::render(){
     BeginDrawing();
 
         ClearBackground(RAYWHITE);
-        DrawText("Quantum Chess!", 20, 20, 20, LIGHTGRAY);
 
         DrawTextureV(board.texture, { 0.0F, 0.0F }, WHITE);
 
@@ -62,7 +62,15 @@ void Window::render(){
         }
 
         // highlighting a square
-        highlightSquare();
+        highlightSquare(getSquare(GetMousePosition()));
+        highlightMovesSelected();
+
+        std::string playerTurnString;
+        if (currentPlayer == White)
+            playerTurnString = "White's Turn";
+        else if (currentPlayer == Black)
+            playerTurnString = "Black's Turn";
+        DrawText(playerTurnString.c_str(), 20, 20, 40, BLACK);
 
         // draw valid moves
         for (const auto& pos : validMovePositions) {
@@ -70,6 +78,20 @@ void Window::render(){
         }
 
     EndDrawing();
+}
+
+void Window::highlightMovesSelected(){
+    switch (gameState)
+    {
+    case pickSquareSecond:
+        highlightSquare(moves.m2.start, PURPLE);
+    case pickPieceSecond:
+        highlightSquare(moves.m1.end, PURPLE);
+    case pickSquareFirst:
+        highlightSquare(moves.m1.start, PURPLE);
+    default:
+        break;
+    }
 }
 
 // @TODO implement poll event method
@@ -84,9 +106,59 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        movePiece();
+        handleLeftMouseDown();
     }
 
+}
+
+void Window::handleLeftMouseDown(){
+    auto squarePicked = getSquare(GetMousePosition());
+
+    switch (gameState)
+    {
+    case pickPieceFirst:
+        if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
+            break;
+        }
+        moves.m1.start = squarePicked;
+        gameState = pickSquareFirst;
+        break;
+    case pickSquareFirst:
+        moves.m1.end = squarePicked;
+        gameState = pickPieceSecond;
+        break;
+    case pickPieceSecond:
+        if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
+            break;
+        }
+        moves.m2.start = squarePicked;
+        gameState = pickSquareSecond;
+        break;
+    case pickSquareSecond:
+        moves.m2.end = squarePicked;
+        gameState = pickPieceFirst;
+
+        if (moves.m1 == moves.m2){
+            gameState = pickPieceSecond;
+            break;
+        }
+
+        if (currentPlayer == White)
+            currentPlayer = Black;
+        else 
+            currentPlayer = White;
+
+        if ( std::rand() % 2 == 0 ){
+            game.movePiece(moves.m1);
+        }
+        else {
+            game.movePiece(moves.m2);
+        }
+        break;
+
+    default:
+        break;
+    }
 }
 
 /*
@@ -188,70 +260,39 @@ void Window::drawPiece(int pieceKey, Vector2 pos, bool center){
     );
 }
 
-void Window::highlightSquare(){
-    auto square = getSquare(GetMousePosition());
-    if (square.row != -1 && square.column != -1) {
-        Vector2 squarePos = getSquarePosition(square);
-        DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(BLUE, 0.3f));
+void Window::highlightSquare(Pos pos, Color color){
+    if (pos.row != -1 && pos.column != -1) {
+        Vector2 squarePos = getSquarePosition(pos);
+        DrawRectangleV(squarePos, {boardWidth/8, boardWidth/8}, Fade(color, 0.3f));
     }
 }
 
 void Window::loadSprites(){
     sprites.resize(12);
 
-    sprites[pawn] = LoadTexture("../assets/wp.png");
-    sprites[knight] = LoadTexture("../assets/wn.png");
-    sprites[bishop] = LoadTexture("../assets/wb.png");
-    sprites[rook] = LoadTexture("../assets/wr.png");
-    sprites[queen] = LoadTexture("../assets/wq.png");
-    sprites[king] = LoadTexture("../assets/wk.png");
-    sprites[pawn + 6] = LoadTexture("../assets/bp.png");
-    sprites[knight + 6] = LoadTexture("../assets/bn.png");
-    sprites[bishop + 6] = LoadTexture("../assets/bb.png");
-    sprites[rook + 6] = LoadTexture("../assets/br.png");
-    sprites[queen + 6] = LoadTexture("../assets/bq.png");
-    sprites[king + 6] = LoadTexture("../assets/bk.png");
+    sprites[WPawn] = LoadTexture("../assets/wp.png");
+    sprites[WKnight] = LoadTexture("../assets/wn.png");
+    sprites[WBishop] = LoadTexture("../assets/wb.png");
+    sprites[WRook] = LoadTexture("../assets/wr.png");
+    sprites[WQueen] = LoadTexture("../assets/wq.png");
+    sprites[WKing] = LoadTexture("../assets/wk.png");
+    sprites[BPawn] = LoadTexture("../assets/bp.png");
+    sprites[BKnight] = LoadTexture("../assets/bn.png");
+    sprites[BBishop] = LoadTexture("../assets/bb.png");
+    sprites[BRook] = LoadTexture("../assets/br.png");
+    sprites[BQueen] = LoadTexture("../assets/bq.png");
+    sprites[BKing] = LoadTexture("../assets/bk.png");
 }
 
 void Window::updateBoard() {
     render();
 }
-
-void Window::movePiece() {
-    auto square = getSquare(GetMousePosition());
-    if(square.row == -1 || square.row == -1)
-        return;
-
-    if(!game.isEmpty(square)){
-        auto moves = game.getPiece(square)->getValidMoves()[0];
-        setDisplayMoves();
-        game.movePiece(square, {square.row + moves.row, square.column + moves.column}, [this]() { updateBoard(); });
-    }
-}
-
-void Window::setDisplayMoves() {
-    if (validMovePositions.size() > 0) {
-        validMovePositions.clear();
-    }
-
-    auto square = getSquare(GetMousePosition());
-    if (square.row == -1 || square.column == -1)
-        return;
-
-    auto validMoves = game.getPiece(square)->getValidMoves();
-    if (validMoves.size() <= 0)
-        return;
-
-    for (const auto& move : validMoves) {
-        int upDown = move.row + square.row;
-        int leftRight = move.column + square.column;
-
-        // if the move is out of bounds, skip it
-        if (upDown < 0 || upDown >= 8 || leftRight < 0 || leftRight >= 8) {
-            continue;
-        }
-
-        Vector2 pos = getSquarePosition({upDown, leftRight});
-        validMovePositions.push_back(pos);
-    }
+ 
+SquareColor Window::getPieceColor(PieceID ID) {
+    if (ID >= 0 && ID <= 5)
+        return White;
+    if (ID >= 6 && ID <= 11)
+        return Black;
+    else
+        return InvalidColor;
 }

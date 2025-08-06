@@ -29,5 +29,5 @@ std::vector<Pos> Queen::getValidMoves(){
 }
 
 PieceID Queen::getType() const{
-    return queen;
+    return (color == White) ? WQueen : BQueen;
 }

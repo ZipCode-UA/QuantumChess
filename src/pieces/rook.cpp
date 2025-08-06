@@ -21,5 +21,5 @@ std::vector<Pos> Rook::getValidMoves(){
 }
 
 PieceID Rook::getType() const{
-    return rook;
+    return (color == White) ? WRook : BRook;
 }

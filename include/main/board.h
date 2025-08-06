@@ -18,18 +18,20 @@ class Board{
 private:
     std::unique_ptr<Piece> pieces[8][8];
 
+    // returns a reference to the piece at the given position
+    std::unique_ptr<Piece>& getPiece(Pos pos);
+
 public:
     Board();
 
     void resetBoard();
 
     // Returns a list of pieces on the Board. Stores position and type of each piece
-    std::vector<std::pair<Pos, int>> getPieces();
+    std::vector<std::pair<Pos, PieceID>> getPieces();
 
-    // returns a reference to the piece at the given position
-    std::unique_ptr<Piece>& getPiece(Pos pos);
+    PieceID getPieceID(Pos square);
 
-    void movePiece(Pos from, Pos to, std::function<void()> updateBoard );
+    void movePiece(Move move);
 
     // Checks if the square on board is empty
     bool isEmpty(Pos pos);

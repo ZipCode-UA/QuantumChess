@@ -3,26 +3,51 @@
 
 enum SquareColor{
     White,
-    Black
+    Black,
+    InvalidColor
 };
 
 enum PieceID{
-    king,
-    queen,
-    bishop,
-    knight,
-    rook,
-    pawn
+    WKing,
+    WQueen,
+    WBishop,
+    WKnight,
+    WRook,
+    WPawn,
+    BKing,
+    BQueen,
+    BBishop,
+    BKnight,
+    BRook,
+    BPawn,
+    InvalidPiece
+};
+
+enum States {
+    pickPieceFirst,
+    pickSquareFirst,
+    pickPieceSecond,
+    pickSquareSecond,
+    movePieces,
+    waitingForOpponent
 };
 
 struct Pos{
     int row;
     int column;
+
+    bool operator==(const Pos& rightSide) const {
+        return row == rightSide.row && column == rightSide.column;
+    }
 };
 
 struct Move{
     Pos start;
     Pos end;
+
+    bool operator==(const Move& rightSide) const {
+        return start == rightSide.start && end == rightSide.end;
+    }
 };
 
 struct MovePair{
