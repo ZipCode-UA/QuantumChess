@@ -131,6 +131,11 @@ void Window::handleLeftMouseDown(){
         moves.m2.end = squarePicked;
         gameState = pickPieceFirst;
 
+        if (moves.m1 == moves.m2){
+            gameState = pickPieceSecond;
+            break;
+        }
+
         if ( std::rand() % 2 == 0 ){
             game.movePiece(moves.m1);
         }

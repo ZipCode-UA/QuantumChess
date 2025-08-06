@@ -27,7 +27,7 @@ public:
     void resetBoard();
 
     // Returns a list of pieces on the Board. Stores position and type of each piece
-    std::vector<std::pair<Pos, int>> getPieces();
+    std::vector<std::pair<Pos, PieceID>> getPieces();
 
     void movePiece(Move move);
 

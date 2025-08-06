@@ -24,12 +24,12 @@ Board::Board(){
 }
 
 // Returns a list of pieces on the Board. Smove.endres position and type of each piece
-std::vector<std::pair<Pos, int>> Board::getPieces() {
-    std::vector<std::pair<Pos, int>> pieceList;
+std::vector<std::pair<Pos, PieceID>> Board::getPieces() {
+    std::vector<std::pair<Pos, PieceID>> pieceList;
     for (int i = 0; i < 8; ++i){
         for (int j = 0; j < 8; ++j){
             if (pieces[i][j] != nullptr){
-                pieceList.push_back(std::make_pair<Pos, int>(pieces[i][j].get()->getPosition(), pieces[i][j].get()->getType() + pieces[i][j].get()->getColor() * 6));
+                pieceList.push_back(std::make_pair<Pos, PieceID>(pieces[i][j].get()->getPosition(), (PieceID)(pieces[i][j].get()->getType() + pieces[i][j].get()->getColor() * 6)));
             }
         }
     }
