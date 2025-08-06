@@ -132,10 +132,10 @@ void Window::handleLeftMouseDown(){
         gameState = pickPieceFirst;
 
         if ( std::rand() % 2 == 0 ){
-            game.movePiece(moves.m1.start, moves.m1.end);
+            game.movePiece(moves.m1);
         }
         else {
-            game.movePiece(moves.m2.start, moves.m2.end);
+            game.movePiece(moves.m2);
         }
         break;
 
@@ -271,41 +271,3 @@ void Window::updateBoard() {
     render();
 }
 
-void Window::movePiece() {
-    auto square = getSquare(GetMousePosition());
-    if(square.row == -1 || square.row == -1)
-        return;
-
-    if(!game.isEmpty(square)){
-        auto moves = game.getPiece(square)->getValidMoves()[0];
-        setDisplayMoves();
-        game.movePiece(square, {square.row + moves.row, square.column + moves.column});
-    }
-}
-
-void Window::setDisplayMoves() {
-    if (validMovePositions.size() > 0) {
-        validMovePositions.clear();
-    }
-
-    auto square = getSquare(GetMousePosition());
-    if (square.row == -1 || square.column == -1)
-        return;
-
-    auto validMoves = game.getPiece(square)->getValidMoves();
-    if (validMoves.size() <= 0)
-        return;
-
-    for (const auto& move : validMoves) {
-        int upDown = move.row + square.row;
-        int leftRight = move.column + square.column;
-
-        // if the move is out of bounds, skip it
-        if (upDown < 0 || upDown >= 8 || leftRight < 0 || leftRight >= 8) {
-            continue;
-        }
-
-        Vector2 pos = getSquarePosition({upDown, leftRight});
-        validMovePositions.push_back(pos);
-    }
-}

@@ -76,10 +76,6 @@ private:
     // highlight the square that the user is hovering over
     void highlightSquare(Pos pos, Color color = BLUE);
 
-    void movePiece();
-
-    void setDisplayMoves();
-
     void highlightMovesSelected();
 
 public:

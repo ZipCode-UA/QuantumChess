@@ -23,7 +23,7 @@ Board::Board(){
     resetBoard();
 }
 
-// Returns a list of pieces on the Board. Stores position and type of each piece
+// Returns a list of pieces on the Board. Smove.endres position and type of each piece
 std::vector<std::pair<Pos, int>> Board::getPieces() {
     std::vector<std::pair<Pos, int>> pieceList;
     for (int i = 0; i < 8; ++i){
@@ -69,19 +69,19 @@ void Board::resetBoard(){
     }
 }
 
-void Board::movePiece(Pos from, Pos to) {
-    if(from.row < 0 || from.row >= 8 || from.column < 0 || from.column >= 8 ||
-        to.row < 0 || to.row >= 8 || to.column < 0 || to.column >= 8) {
+void Board::movePiece(Move move) {
+    if(move.start.row < 0 || move.start.row >= 8 || move.start.column < 0 || move.start.column >= 8 ||
+        move.end.row < 0 || move.end.row >= 8 || move.end.column < 0 || move.end.column >= 8) {
         return; // Invalid move
     }
-    if (pieces[from.row][from.column] == nullptr) {
+    if (pieces[move.start.row][move.start.column] == nullptr) {
         return; // No piece at the source position
     }
 
-    if (pieces[from.row][from.column] != nullptr) {
-        pieces[to.row][to.column] = std::move(pieces[from.row][from.column]);
-        pieces[to.row][to.column]->setPosition(to);
-        pieces[from.row][from.column] = nullptr;
+    if (pieces[move.start.row][move.start.column] != nullptr) {
+        pieces[move.end.row][move.end.column] = std::move(pieces[move.start.row][move.start.column]);
+        pieces[move.end.row][move.end.column]->setPosition(move.end);
+        pieces[move.start.row][move.start.column] = nullptr;
     }
 }
 
