@@ -18,11 +18,19 @@ enum PieceID{
 struct Pos{
     int row;
     int column;
+
+    bool operator==(const Pos& rightSide) const {
+        return row == rightSide.row && column == rightSide.column;
+    }
 };
 
 struct Move{
     Pos start;
     Pos end;
+
+    bool operator==(const Move& rightSide) const {
+        return start == rightSide.start && end == rightSide.end;
+    }
 };
 
 struct MovePair{
