@@ -217,18 +217,18 @@ void Window::highlightSquare(){
 void Window::loadSprites(){
     sprites.resize(12);
 
-    sprites[Pawn] = LoadTexture("../assets/wp.png");
-    sprites[Knight] = LoadTexture("../assets/wn.png");
-    sprites[Bishop] = LoadTexture("../assets/wb.png");
-    sprites[Rook] = LoadTexture("../assets/wr.png");
-    sprites[Queen] = LoadTexture("../assets/wq.png");
-    sprites[King] = LoadTexture("../assets/wk.png");
-    sprites[Pawn + 6] = LoadTexture("../assets/bp.png");
-    sprites[Knight + 6] = LoadTexture("../assets/bn.png");
-    sprites[Bishop + 6] = LoadTexture("../assets/bb.png");
-    sprites[Rook + 6] = LoadTexture("../assets/br.png");
-    sprites[Queen + 6] = LoadTexture("../assets/bq.png");
-    sprites[King + 6] = LoadTexture("../assets/bk.png");
+    sprites[pawn] = LoadTexture("../assets/wp.png");
+    sprites[knight] = LoadTexture("../assets/wn.png");
+    sprites[bishop] = LoadTexture("../assets/wb.png");
+    sprites[rook] = LoadTexture("../assets/wr.png");
+    sprites[queen] = LoadTexture("../assets/wq.png");
+    sprites[king] = LoadTexture("../assets/wk.png");
+    sprites[pawn + 6] = LoadTexture("../assets/bp.png");
+    sprites[knight + 6] = LoadTexture("../assets/bn.png");
+    sprites[bishop + 6] = LoadTexture("../assets/bb.png");
+    sprites[rook + 6] = LoadTexture("../assets/br.png");
+    sprites[queen + 6] = LoadTexture("../assets/bq.png");
+    sprites[king + 6] = LoadTexture("../assets/bk.png");
 }
 
 void Window::updateBoard() {
