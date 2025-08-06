@@ -7,12 +7,12 @@ enum SquareColor{
 };
 
 enum PieceID{
-    king,
-    queen,
-    bishop,
-    knight,
-    rook,
-    pawn
+    King,
+    Queen,
+    Bishop,
+    Knight,
+    Rook,
+    Pawn
 };
 
 struct Pos{

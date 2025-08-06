@@ -28,6 +28,8 @@ private:
     float boardWidth;
 
     Board game;
+    States gameState;
+    MovePair moves;
 
     std::vector<Vector2> validMovePositions;
 
@@ -36,6 +38,8 @@ private:
     /*
         based on screenWidth and Screen Height determines board width and start and end positions
     */
+
+    void handleLeftMouseDown();
 
     /*
         Render window
