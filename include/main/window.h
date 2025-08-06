@@ -30,6 +30,7 @@ private:
     Board game;
     States gameState = States::pickPieceFirst;
     MovePair moves;
+    SquareColor currentPlayer = White;
 
     std::vector<Vector2> validMovePositions;
 
