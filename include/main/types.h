@@ -23,6 +23,8 @@ enum PieceID{
     InvalidPiece
 };
 
+SquareColor getPieceColor(PieceID ID);
+
 enum States {
     pickPieceFirst,
     pickSquareFirst,

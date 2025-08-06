@@ -14,6 +14,7 @@
 #include "boardInterface.h"
 #include <iostream>
 #include <random>
+#include <algorithm>
 
 /*
     Initializer for window class
@@ -72,15 +73,23 @@ void Window::render(){
             playerTurnString = "Black's Turn";
         DrawText(playerTurnString.c_str(), 20, 20, 40, BLACK);
 
-        // draw valid moves
-        for (const auto& pos : validMovePositions) {
-            DrawCircleV({pos.x + boardWidth/16, pos.y + boardWidth/16}, boardWidth/20, Fade(GREEN, 0.5f));
-        }
+
 
     EndDrawing();
 }
 
 void Window::highlightMovesSelected(){
+
+    if (gameState == pickSquareFirst) {
+        for (auto& cur : validMovePositions){
+            highlightSquare(cur, RED);
+        }
+    } else if (gameState == pickSquareSecond) {
+        for (auto& cur : validMovePositions){
+            highlightSquare(cur, RED);
+        }
+    }
+
     switch (gameState)
     {
     case pickSquareSecond:
@@ -120,29 +129,37 @@ void Window::handleLeftMouseDown(){
         if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
             break;
         }
+        game.getPiecesMoves(squarePicked, validMovePositions);
         moves.m1.start = squarePicked;
         gameState = pickSquareFirst;
         break;
+
     case pickSquareFirst:
         moves.m1.end = squarePicked;
+        if (std::find(validMovePositions.begin(), validMovePositions.end(), moves.m1.end) == validMovePositions.end())
+            break;
         gameState = pickPieceSecond;
         break;
+
     case pickPieceSecond:
         if (game.isEmpty(squarePicked) || getPieceColor(game.getPieceID(squarePicked)) != currentPlayer){
             break;
         }
+        game.getPiecesMoves(squarePicked, validMovePositions);
         moves.m2.start = squarePicked;
         gameState = pickSquareSecond;
         break;
+
     case pickSquareSecond:
         moves.m2.end = squarePicked;
-        gameState = pickPieceFirst;
+        if (std::find(validMovePositions.begin(), validMovePositions.end(), moves.m2.end) == validMovePositions.end())
+            break;
 
+        gameState = pickPieceFirst;
         if (moves.m1 == moves.m2){
             gameState = pickPieceSecond;
             break;
         }
-
         if (currentPlayer == White)
             currentPlayer = Black;
         else 
@@ -288,11 +305,11 @@ void Window::updateBoard() {
     render();
 }
  
-SquareColor Window::getPieceColor(PieceID ID) {
-    if (ID >= 0 && ID <= 5)
-        return White;
-    if (ID >= 6 && ID <= 11)
-        return Black;
-    else
-        return InvalidColor;
-}
+//SquareColor Window::getPieceColor(PieceID ID) {
+//    if (ID >= 0 && ID <= 5)
+//        return White;
+//    if (ID >= 6 && ID <= 11)
+//        return Black;
+//    else
+//        return InvalidColor;
+//}

@@ -1,8 +1,9 @@
 #include "king.h"
+#include "board.h"
 #include <utility>
 #include <vector>
 
-King::King(SquareColor color, Pos position) : Piece(color, position) {
+King::King(SquareColor color, Pos position, Board *board) : Piece(color, position, board) {
 
 }
 

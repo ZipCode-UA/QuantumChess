@@ -48,19 +48,19 @@ void Board::resetBoard(){
         for (int j = 0; j < 8; ++j){
             SquareColor color = (i == 7 || i == 6) ? Black : White;
             if (i == 1 || i==6){
-                pieces[i][j] = std::make_unique<Pawn>(color, (Pos){i, j});
+                pieces[i][j] = std::make_unique<Pawn>(color, (Pos){i, j}, this);
             }
             else if (i == 0 || i == 7){
                 if (j == 0 || j == 7)
-                    pieces[i][j] = std::make_unique<Rook>(color, (Pos){i, j});
+                    pieces[i][j] = std::make_unique<Rook>(color, (Pos){i, j}, this);
                 else if (j == 1 || j == 6)
-                    pieces[i][j] = std::make_unique<Knight>(color, (Pos){i, j});
+                    pieces[i][j] = std::make_unique<Knight>(color, (Pos){i, j}, this);
                 else if (j == 2 || j == 5)
-                    pieces[i][j] = std::make_unique<Bishop>(color, (Pos){i, j});
+                    pieces[i][j] = std::make_unique<Bishop>(color, (Pos){i, j}, this);
                 else if ((j == 4 && i == 7) || (j == 3 && i == 0))
-                    pieces[i][j] = std::make_unique<King>(color, (Pos){i, j});
+                    pieces[i][j] = std::make_unique<King>(color, (Pos){i, j}, this);
                 else if ((j == 4 && i == 0) || (j == 3 && i == 7))
-                    pieces[i][j] = std::make_unique<Queen>(color, (Pos){i, j});
+                    pieces[i][j] = std::make_unique<Queen>(color, (Pos){i, j}, this);
             }
             else {
                 pieces[i][j] = nullptr;
@@ -94,4 +94,8 @@ PieceID Board::getPieceID(Pos square){
 
 bool Board::isEmpty(Pos pos) {
     return pieces[pos.row][pos.column] == nullptr;
+}
+
+void Board::getPiecesMoves(Pos piecePos, std::vector<Pos>& movesAvailable){
+    movesAvailable = pieces[piecePos.row][piecePos.column]->getValidMoves();
 }

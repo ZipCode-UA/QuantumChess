@@ -1,8 +1,9 @@
 #include "bishop.h"
+#include "board.h"
 #include <utility>
 #include <vector>
 
-Bishop::Bishop(SquareColor color, Pos position) : Piece(color, position) {
+Bishop::Bishop(SquareColor color, Pos position, Board *board) : Piece(color, position, board) {
 
 }
 

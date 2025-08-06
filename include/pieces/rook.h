@@ -15,7 +15,7 @@
 
 class Rook : public Piece {
 public:
-    Rook(SquareColor color, Pos pos);
+    Rook(SquareColor color, Pos pos, Board *board);
 
     std::vector<Pos> getValidMoves() override;
 

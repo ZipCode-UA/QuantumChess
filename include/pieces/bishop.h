@@ -15,7 +15,7 @@
 
 class Bishop : public Piece{
 public:
-    Bishop(SquareColor color, Pos pos);
+    Bishop(SquareColor color, Pos pos, Board *board);
 
     std::vector<Pos> getValidMoves() override;
 

@@ -1,8 +1,9 @@
 #include "knight.h"
+#include "board.h"
 #include <utility>
 #include <vector>
 
-Knight::Knight(SquareColor color, Pos position) : Piece(color, position) {
+Knight::Knight(SquareColor color, Pos position, Board *board) : Piece(color, position, board) {
 
 }
 

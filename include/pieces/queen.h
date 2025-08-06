@@ -15,7 +15,7 @@
 
 class Queen : public Piece{
 public:
-    Queen(SquareColor c, Pos pos);
+    Queen(SquareColor c, Pos pos, Board* board);
 
     std::vector<Pos> getValidMoves() override;
 

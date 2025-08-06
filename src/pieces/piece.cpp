@@ -1,6 +1,7 @@
 #include "piece.h"
+#include "board.h"
 
-Piece::Piece(SquareColor color, Pos pos) : color(color), pos(pos) {
+Piece::Piece(SquareColor color, Pos pos, Board *board) : color(color), pos(pos), board(board) {
 
 }
 
@@ -14,4 +15,5 @@ SquareColor Piece::getColor() const{
 
 void Piece::setPosition(Pos newPos) {
     pos = newPos;
+    hasMoved = true;
 }

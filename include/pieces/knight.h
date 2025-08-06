@@ -15,7 +15,7 @@
 
 class Knight : public Piece{
 public:
-    Knight(SquareColor c, Pos pos);
+    Knight(SquareColor c, Pos pos, Board *board);
 
     std::vector<Pos> getValidMoves() override;
 

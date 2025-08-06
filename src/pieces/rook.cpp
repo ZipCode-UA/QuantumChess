@@ -1,8 +1,9 @@
 #include "rook.h"
+#include "board.h"
 #include <utility>
 #include <vector>
 
-Rook::Rook(SquareColor color, Pos position) : Piece(color, position) {
+Rook::Rook(SquareColor color, Pos position, Board *board) : Piece(color, position, board) {
 
 }
 

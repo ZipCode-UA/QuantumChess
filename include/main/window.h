@@ -32,7 +32,7 @@ private:
     MovePair moves;
     SquareColor currentPlayer = White;
 
-    std::vector<Vector2> validMovePositions;
+    std::vector<Pos> validMovePositions;
 
     void loadSprites();
 
@@ -47,7 +47,7 @@ private:
     */
     void render();
 
-    SquareColor getPieceColor(PieceID ID);
+    // SquareColor getPieceColor(PieceID ID);
 
     /*
         poll events for

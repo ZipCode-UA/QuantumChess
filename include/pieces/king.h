@@ -15,7 +15,7 @@
 
 class King : public Piece{
 public:
-    King(SquareColor c, Pos pos);
+    King(SquareColor c, Pos pos, Board* board);
 
     std::vector<Pos> getValidMoves() override;
 

@@ -1,8 +1,9 @@
 #include "pawn.h"
+#include "board.h"
 #include <utility>
 #include <vector>
 
-Pawn::Pawn(SquareColor color, Pos position) : Piece(color, position) {
+Pawn::Pawn(SquareColor color, Pos position, Board* board) : Piece(color, position, board) {
 
 }
 /*
@@ -12,18 +13,27 @@ Pawn::Pawn(SquareColor color, Pos position) : Piece(color, position) {
     therefore the function would return {1, 0}
 */
 std::vector<Pos> Pawn::getValidMoves(){
+    int directionMultiplier = (color == White) ? 1 : -1;
+    std::vector<Pos> moves;
 
-    if(color == White){
-        Pos down = {1, 0};
-        Pos diagonalRight = {1, 1};
-        Pos diagonalLeft = {1, -1};
-        return {down, diagonalRight, diagonalLeft};
+    Pos forward = {pos.row + 1*directionMultiplier, pos.column + 0};
+    if (board->isEmpty(forward))
+        moves.push_back(forward);
+    
+    Pos forwardTwo = {pos.row + 2*directionMultiplier, pos.column + 0};
+    if (hasMoved == false && board->isEmpty(forward) && board->isEmpty(forwardTwo)){
+        moves.push_back(forwardTwo);
     }
 
-    Pos up = {-1, 0};
-    Pos diagonalRight = {-1, 1};
-    Pos diagonalLeft = {-1, -1};
-    return {up, diagonalRight, diagonalLeft};
+    Pos diagonalRight = {pos.row + 1*directionMultiplier, pos.column +1};
+    if (getPieceColor(board->getPieceID(diagonalRight)) != color && !board->isEmpty(diagonalRight))
+        moves.push_back(diagonalRight);
+
+    Pos diagonalLeft = {pos.row + 1*directionMultiplier, pos.column + -1};
+     if (getPieceColor(board->getPieceID(diagonalLeft)) != color && !board->isEmpty(diagonalLeft))
+        moves.push_back(diagonalLeft);
+
+    return moves;
 }
 
 PieceID Pawn::getType() const{

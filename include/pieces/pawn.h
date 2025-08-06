@@ -15,7 +15,7 @@
 
 class Pawn : public Piece{
 public:
-    Pawn(SquareColor c, Pos pos);
+    Pawn(SquareColor c, Pos pos, Board* board);
 
     std::vector<Pos> getValidMoves() override;
 

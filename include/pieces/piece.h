@@ -13,13 +13,18 @@
 #include <utility>
 #include <vector>
 
+class Board;
+
 class Piece{
 protected:
     // Assuming this is the piece's color
     SquareColor color;
     Pos pos;
+    Board *board;
+    bool hasMoved = false;
+
 public:
-    Piece(SquareColor color, Pos pos);
+    Piece(SquareColor color, Pos pos, Board *board);
 
     Pos getPosition() const;
 
