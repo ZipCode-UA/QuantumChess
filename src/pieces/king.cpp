@@ -16,5 +16,5 @@ std::vector<Pos> King::getValidMoves(){
 }
 
 PieceID King::getType() const{
-    return king;
+    return (color == White) ? WKing : BKing;
 }

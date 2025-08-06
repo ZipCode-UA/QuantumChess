@@ -29,5 +29,5 @@ std::vector<Pos> Knight::getValidMoves(){
 }
 
 PieceID Knight::getType() const{
-    return knight;
+    return (color == White) ? WKnight : BKnight;
 }

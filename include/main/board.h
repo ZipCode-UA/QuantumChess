@@ -29,6 +29,8 @@ public:
     // Returns a list of pieces on the Board. Stores position and type of each piece
     std::vector<std::pair<Pos, PieceID>> getPieces();
 
+    PieceID getPieceID(Pos square);
+
     void movePiece(Move move);
 
     // Checks if the square on board is empty

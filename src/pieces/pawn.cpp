@@ -27,5 +27,5 @@ std::vector<Pos> Pawn::getValidMoves(){
 }
 
 PieceID Pawn::getType() const{
-    return pawn;
+    return (color == White) ? WPawn : BPawn;
 }

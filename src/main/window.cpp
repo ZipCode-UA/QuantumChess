@@ -258,18 +258,18 @@ void Window::highlightSquare(Pos pos, Color color){
 void Window::loadSprites(){
     sprites.resize(12);
 
-    sprites[pawn] = LoadTexture("../assets/wp.png");
-    sprites[knight] = LoadTexture("../assets/wn.png");
-    sprites[bishop] = LoadTexture("../assets/wb.png");
-    sprites[rook] = LoadTexture("../assets/wr.png");
-    sprites[queen] = LoadTexture("../assets/wq.png");
-    sprites[king] = LoadTexture("../assets/wk.png");
-    sprites[pawn + 6] = LoadTexture("../assets/bp.png");
-    sprites[knight + 6] = LoadTexture("../assets/bn.png");
-    sprites[bishop + 6] = LoadTexture("../assets/bb.png");
-    sprites[rook + 6] = LoadTexture("../assets/br.png");
-    sprites[queen + 6] = LoadTexture("../assets/bq.png");
-    sprites[king + 6] = LoadTexture("../assets/bk.png");
+    sprites[WPawn] = LoadTexture("../assets/wp.png");
+    sprites[WKnight] = LoadTexture("../assets/wn.png");
+    sprites[WBishop] = LoadTexture("../assets/wb.png");
+    sprites[WRook] = LoadTexture("../assets/wr.png");
+    sprites[WQueen] = LoadTexture("../assets/wq.png");
+    sprites[WKing] = LoadTexture("../assets/wk.png");
+    sprites[BPawn] = LoadTexture("../assets/bp.png");
+    sprites[BKnight] = LoadTexture("../assets/bn.png");
+    sprites[BBishop] = LoadTexture("../assets/bb.png");
+    sprites[BRook] = LoadTexture("../assets/br.png");
+    sprites[BQueen] = LoadTexture("../assets/bq.png");
+    sprites[BKing] = LoadTexture("../assets/bk.png");
 }
 
 void Window::updateBoard() {

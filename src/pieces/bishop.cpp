@@ -20,5 +20,5 @@ std::vector<Pos> Bishop::getValidMoves(){
 }
 
 PieceID Bishop::getType() const{
-    return bishop;
+    return (color == White) ? WBishop : BBishop;
 }

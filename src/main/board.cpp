@@ -29,7 +29,7 @@ std::vector<std::pair<Pos, PieceID>> Board::getPieces() {
     for (int i = 0; i < 8; ++i){
         for (int j = 0; j < 8; ++j){
             if (pieces[i][j] != nullptr){
-                pieceList.push_back(std::make_pair<Pos, PieceID>(pieces[i][j].get()->getPosition(), (PieceID)(pieces[i][j].get()->getType() + pieces[i][j].get()->getColor() * 6)));
+                pieceList.push_back(std::make_pair<Pos, PieceID>(pieces[i][j].get()->getPosition(), pieces[i][j].get()->getType()));
             }
         }
     }
@@ -83,6 +83,13 @@ void Board::movePiece(Move move) {
         pieces[move.end.row][move.end.column]->setPosition(move.end);
         pieces[move.start.row][move.start.column] = nullptr;
     }
+}
+
+PieceID Board::getPieceID(Pos square){
+    if (pieces[square.row][square.column] == nullptr)
+        return InvalidPiece;
+    else
+        return pieces[square.row][square.column]->getType();
 }
 
 bool Board::isEmpty(Pos pos) {
