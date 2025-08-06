@@ -28,7 +28,6 @@ Window::Window(){
 
     createBoardTexture();
     loadSprites();
-
 }
 
 /*
@@ -106,12 +105,12 @@ void Window::pollEvents(){
         resizedWindow();
     }
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        handleLeftMouseDown();
+        handleLeftMousePressed();
     }
 
 }
 
-void Window::handleLeftMouseDown(){
+void Window::handleLeftMousePressed(){
     auto squarePicked = getSquare(GetMousePosition());
 
     switch (gameState)

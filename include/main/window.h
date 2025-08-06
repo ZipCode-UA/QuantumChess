@@ -14,6 +14,33 @@
 #include <vector>
 
 class Window{
+public:
+    /*
+        Initializer for window class
+    */
+    Window();
+
+    /*
+        Destructor for Window class
+    */
+    ~Window();
+
+    /*
+        Main loop for program
+    */
+    void run();
+
+    /*
+        Get corresponding square by cursor position
+
+        @param cursorPosition 2d vector representing cursor position
+        @return index of cell clicked
+    */
+    Pos getSquare(Vector2 cursorPosition);
+
+    // public method to update the board
+    void updateBoard();
+
 private:
     int screenWidth = 1600;
     int screenHeight = 1000;
@@ -40,7 +67,7 @@ private:
         based on screenWidth and Screen Height determines board width and start and end positions
     */
 
-    void handleLeftMouseDown();
+    void handleLeftMousePressed();
 
     /*
         Render window
@@ -80,33 +107,6 @@ private:
     void highlightSquare(Pos pos, Color color = BLUE);
 
     void highlightMovesSelected();
-
-public:
-    /*
-        Initializer for window class
-    */
-    Window();
-
-    /*
-        Destructor for Window class
-    */
-    ~Window();
-
-    /*
-        Main loop for program
-    */
-    void run();
-
-    /*
-        Get corresponding square by cursor position
-
-        @param cursorPosition 2d vector representing cursor position
-        @return index of cell clicked
-    */
-    Pos getSquare(Vector2 cursorPosition);
-
-    // public method to update the board
-    void updateBoard();
 
 };
 
