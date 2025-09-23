@@ -8,9 +8,6 @@ Pawn::Pawn(SquareColor color, Pos position, Board* board) : Piece(color, positio
 }
 /*
     returns the coordinates of the valid moves for the pawn
-
-    so if the pawn is black it can move up one square
-    therefore the function would return {1, 0}
 */
 std::vector<Pos> Pawn::getValidMoves(){
     int directionMultiplier = (color == White) ? 1 : -1;
