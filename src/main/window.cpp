@@ -7,11 +7,9 @@
 */
 
 #include "window.h"
-#include "boardInterface.h"
 #include "board.h"
 #include "raymath.h"
 #include "raylib.h"
-#include "boardInterface.h"
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -29,7 +27,6 @@ Window::Window(){
 
     createBoardTexture();
     loadSprites();
-
 }
 
 /*
